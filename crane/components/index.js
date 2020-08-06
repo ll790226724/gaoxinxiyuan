@@ -1,3 +1,5 @@
+const companySelect = require('./company_select')
+
 module.exports = {
   route: {
     name: 'map',
@@ -199,5 +201,6 @@ module.exports = {
         class: 'map-mask'
       }
     },
+    companySelect
   ]
 }

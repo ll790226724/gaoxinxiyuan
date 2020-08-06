@@ -8,5 +8,10 @@ export default new Router({
   mode: 'history',
   base: '/',
   routes: [
+    {
+      name: 'map',
+      path: '/map',
+      component: pages.map,
+    },
   ],
 })
