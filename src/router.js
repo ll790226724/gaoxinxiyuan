@@ -8,5 +8,10 @@ export default new Router({
   mode: 'history',
   base: '/',
   routes: [
+    {
+      name: 'enterprise_detail',
+      path: '/enterpriseDetail',
+      component: pages.enterprise_detail,
+    },
   ],
 })

@@ -4,8 +4,7 @@ import router from './router'
 import i18n from './locale/i18n'
 import plugins from './plugins/index'
 
-import '@byzanteam/map-ui/dist/map-ui.css'
-import 'iview/dist/styles/iview.css'
+// import '@byzanteam/map-ui/dist/map-ui.css'
 import './styles/reset.css'
 
 plugins.install()
