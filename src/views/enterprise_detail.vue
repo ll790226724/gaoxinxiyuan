@@ -29,10 +29,16 @@
         </data-loader>
       </div>
     </div>
+    <data-loader v-slot="{ results: results }" url="/v1/components/0137dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data" :params="{name: craneStates.enterpriseName}" :style="{position: 'absolute', top: '204px', left: '732px'}">
+      <image-view :imgs="results && results[0]" />
+    </data-loader>
     <img src="/gaoxinxiyuan/images/icon/flamethrower-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '1310px'}" />
     <div :style="{width: '498px', height: '26px', color: '#fff', fontSize: '26px', lineHeight: '26px', fontWeight: '400', position: 'absolute', top: '131px', left: '1350px'}">
       危化品平面位置摆放图（含应急出口）
     </div>
+    <data-loader v-slot="{ results: results }" url="/v1/components/0177dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data" :params="{name: craneStates.enterpriseName}" :style="{position: 'absolute', top: '204px', left: '1350px'}">
+      <image-view :imgs="results && results[0]" />
+    </data-loader>
   </div>
 </template>
 
@@ -41,19 +47,21 @@ import BuiltInMixin from '../mixins/built_in'
 import {
   DataLoader,
 } from '@byzanteam/vis-components'
+import ImageView from '../components/image-view'
 
 export const enterprise_detail = {
   mixins: [BuiltInMixin],
 
   components: {
     DataLoader,
+    ImageView,
   },
 
   data () {
     return {
       craneStates: {
         tableHeader: [{field: 'company_name', value: '企业名称'}, {field: 'registered_address', value: '注册地址'}, {field: 'actual_address', value: '实际地址'}, {field: 'industry', value: '行业领域'}, {field: 'main_business', value: '主营业务'}, {field: 'header_name', value: '单位负责人姓名'}, {field: 'header_phone', value: '单位负责人电话'}, {field: 'area', value: '场地总面积'}, {field: 'number', value: '从业人数（人）'}, {field: 'security_name', value: '安全负责人姓名'}, {field: 'sucurity_phone', value: '安全负责人电话'}],
-        enterpriseName: '成都天马微电子有限公司',
+        enterpriseName: '成都中光电科技有限公司',
         safetyOfficerData: [{id: '0047dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全总负责人'}, {id: '0057dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全第一负责人'}, {id: '0067dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全第二负责人'}],
       },
     }
@@ -65,7 +73,7 @@ export const enterprise_detail = {
         return `/v1/components/${id}/data`
       }
     }
-  }
+  },
 }
 export default enterprise_detail
 </script>

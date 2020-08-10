@@ -1,10 +1,10 @@
 <template>
   <div class="image-preview">
-    <div class="preview" v-for="url in imgs" :key="url">
+    <div class="preview" v-for="(url,index) in imgs" :key="url+index">
       <img :src="url" class="image" v-viewer="options" />
       <div class="mask">
-        <img src="/public/gaoxinxiyuan/images/icon/search-plus-circle.svg" @click="preview" />
-        <img src="/public/gaoxinxiyuan/images/icon/download-circle.svg" @click="downloadImg(url)" />
+        <img src="/gaoxinxiyuan/images/icon/search-plus-circle.svg" @click="preview" />
+        <img src="/gaoxinxiyuan/images/icon/download-circle.svg" @click="downloadImg(url)" />
       </div>
     </div>
   </div>
@@ -15,7 +15,7 @@ export default {
   name: 'ImageView',
   props: {
     imgs: {
-      type: Object,
+      type: Array,
       default: () => []
     }
   },

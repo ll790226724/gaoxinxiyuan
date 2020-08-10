@@ -58,7 +58,7 @@ module.exports = {
         },
         {
             id: 'enterpriseName',
-            value: '成都天马微电子有限公司',
+            value: '成都中光电科技有限公司',
         },
         {
             id: 'safetyOfficerData',
