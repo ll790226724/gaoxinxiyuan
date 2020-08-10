@@ -82,9 +82,13 @@ module.exports = {
         {
             id: 'background',
             component: 'img',
-            position: [0, 0],
+            position: [32, 84],
             props: {
-                src: '/gaoxinxiyuan/images/dialo-bg.png'
+                src: '/gaoxinxiyuan/images/dialo-bg.png',
+                $style: {
+                    width: 'calc(100% - 64px)',
+                    height: 'auto',
+                }
             },
         },
         ...enterprise,

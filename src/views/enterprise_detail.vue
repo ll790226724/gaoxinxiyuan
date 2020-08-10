@@ -1,6 +1,6 @@
 <template>
   <div class="enterprise_detail">
-    <img ref="background" src="/gaoxinxiyuan/images/dialo-bg.png" :style="{position: 'absolute', top: '0px', left: '0px'}" />
+    <img ref="background" src="/gaoxinxiyuan/images/dialo-bg.png" :style="{width: 'calc(100% - 64px)', height: 'auto', position: 'absolute', top: '84px', left: '32px'}" />
     <img src="/gaoxinxiyuan/images/icon/times-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '48px'}" />
     <div :style="{width: '524px', height: '28px', color: '#fff', fontSize: '28px', lineHeight: '28px', fontWeight: '600', position: 'absolute', top: '130px', left: '88px'}" v-text="craneStates.enterpriseName" />
     <data-loader ref="enterpriseData" v-slot="{ results: results }" url="/v1/components/0027dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data" :style="{width: '618px', height: '848px', border: '1px solid rgba(255, 255, 255, .1)', overflow: 'hidden', position: 'absolute', top: '204px', left: '32px'}" :params="{name: craneStates.enterpriseName}">
