@@ -1,4 +1,5 @@
 const companySelect = require('./company_select')
+const map = require('./map')
 
 module.exports = {
   route: {
@@ -173,6 +174,7 @@ module.exports = {
     }
   ],
   components: [
-    companySelect
+    companySelect,
+    map
   ]
 }

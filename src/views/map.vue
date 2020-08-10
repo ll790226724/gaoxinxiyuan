@@ -1,12 +1,28 @@
 <template>
   <div class="map">
-    <div class="map-mask" :style="{position: 'absolute', top: '0px', left: '0px'}" />
     <data-loader ref="company_select" :style="{position: 'absolute', top: '32px', left: '32px'}">
       <Select class="company-select" :filterable="true" :clearable="true" prefix="ios-search" :style="{width: '400px', height: '48px'}" v-model="craneStates.currentDepartment">
         <Option v-for="(item, key) in craneStates.selectOptions" :key="key" :value="item.index" :label="item.name">
           {{item.name}}
         </Option>
       </Select>
+    </data-loader>
+    <data-loader v-slot="{ results: results }" :style="{transform: `scale(${1/getMapScale()})`, width: '100%', height: '100%', position: 'absolute', top: '0px', left: '0px'}" :url="`/v1/components/${craneStates.currentCompanyTag === 'fireFighting' ? '0007dd5e-d3ff-4c5f-9ab4-44d75afb40a1' : '0107dd5e-d3ff-4c5f-9ab4-44d75afb40a1'}/data`" method="get" :data="[['']]">
+      <base-map ref="map" :mapOptions="craneStates.mapOptions" :satellite="true">
+        <div v-if="craneStates.currentCompanyTag !== 'dangerousChemical'">
+          <data-loader v-slot="{ results: results }" :url="`/v1/components/0007dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data`" method="get" :data="[['']]" />
+          <regions ref="fireFightingRegions" @area-clicked="(geoJSON, area)=>[setState('selectedArea', area), setState('currentCompanyTag', 'fireFighting'), setState('showDetail', true)]" :areas="fireFightingCompany.features" :areaStyle="craneStates.fireFightingAreaStyle" :areaHoverStyle="craneStates.fireFightingHoverStyle" />
+        </div>
+        <div v-if="craneStates.currentCompanyTag !== 'fireFighting'">
+          <regions ref="fireFightingRegions" @area-clicked="(geoJSON, area)=>[setState('selectedArea', area), setState('currentCompanyTag', 'dangerousChemical'), setState('showDetail', true)]" :areas="dangerousChemicalCompany.features" :areaStyle="craneStates.dangerousChemicalAreaStyle" :areaHoverStyle="craneStates.dangerousChemicalHoverStyle" />
+        </div>
+        <div v-if="fireFightingMarkerShow">
+          <custom-marker ref="fireFightingBuildingMarker" v-for="(marker, index) in " :key="index + marker.point[0] + marker.point[1] + marker.tag + marker.name" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentBuilding', marker.target.getExtData().name), setState('currentCompanyTag', marker.target.getExtData().tag), setState('currentParty', marker.target.getExtData().party), setState('departmentSelected', false), setState('showDetail', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" anchor="bottom-center" :zIndex="craneStates.currentBuilding === marker.name ? 300 : 100" :content="`<div style='display: flex; align-items: center; flex-direction: column; justify-content: center;'><div class='building-marker-label ${ craneStates.currentBuilding === marker.name ? 'selected' : ''}'>${marker.name ? marker.name : '未命名'}</div><img style='height: 32px; width: 32px;' src='https://slp-qiniu-beta.skylarkly.com/FhA38Er8OX2N384utu196Dph1mru'/></div>`" />
+        </div>
+        <div v-if="dangerousChemicalMarkerShow">
+          <custom-marker ref="dangerousChemicalBuildingMarker" v-for="(marker, index) in " :key="marker.point[0] + marker.point[1] + marker.tag + marker.name + index" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentBuilding', marker.target.getExtData().name), setState('currentCompanyTag', marker.target.getExtData().tag), setState('currentParty', marker.target.getExtData().name === '天华社区' ? `中共成都高新技术产业开发区桂溪街道${marker.target.getExtData().party}第一支部委员会` : `中共成都高新技术产业开发区桂溪街道${marker.target.getExtData().party}委员会`), setState('departmentSelected', false), setState('showDetail', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" anchor="bottom-center" :zIndex="craneStates.currentBuilding === marker.name ? 300 : 100" :content="`<div style='display: flex; align-items: center; flex-direction: column; justify-content: center;'><div class='building-marker-label ${ craneStates.currentBuilding === marker.name ? 'selected' : ''}'>${marker.name ? marker.name : '未命名'}</div><img style='height: 32px; width: 32px;' src='https://slp-qiniu-beta.skylarkly.com/FmOXOMD2Kzjaoqu1t_dgKjfHNmwB'/></div>`" />
+        </div>
+      </base-map>
     </data-loader>
   </div>
 </template>
@@ -20,6 +36,11 @@ import {
   Select,
   Option,
 } from 'view-design'
+import {
+  BaseMap,
+  Regions,
+  CustomMarker,
+} from '@byzanteam/map-ui'
 
 import fireFightingGeoJson from '../../public/zhyq/geojson/fireFighting.json'
 import dangerousChemicalGeoJson from '../../public/zhyq/geojson/fireFighting.json'
@@ -33,6 +54,9 @@ export const map = {
     DataLoader,
     Select,
     Option,
+    BaseMap,
+    Regions,
+    CustomMarker,
   },
 
   data () {
@@ -52,17 +76,17 @@ export const map = {
         outlineAreaHoverStyle: {strokeColor: '#00b1ff', fillColor: 'transparent', fillOpacity: 0.2, strokeWeight: 3},
         dangerousChemicalAreaStyle: {strokeColor: '#16c3c1', fillColor: '#32c5ff', fillOpacity: 0.2, strokeWeight: 3},
         dangerousChemicalHoverStyle: {strokeColor: '#16c3c1', fillColor: '#32c5ff', fillOpacity: 0.2, strokeWeight: 3},
-        comprehensiveAreaStyle: {strokeColor: '#df2417', fillColor: '#32c5ff', fillOpacity: 0.2, strokeWeight: 3},
-        comprehensiveAreaHoverStyle: {strokeColor: '#df2417', fillColor: '#32c5ff', fillOpacity: 0.2, strokeWeight: 3},
+        fireFightingAreaStyle: {strokeColor: '#df2417', fillColor: '#32c5ff', fillOpacity: 0.2, strokeWeight: 3},
+        fireFightingAreaHoverStyle: {strokeColor: '#df2417', fillColor: '#32c5ff', fillOpacity: 0.2, strokeWeight: 3},
         currentBuilding: '',
-        currentBuildingAddress: '',
+        currentCompanyTag: 'fireFighting',
         selectedArea: {},
-        partyCoordinates: [{name: '新南商圈综合党委', point: [104.06346, 30.603481], labelMarker: true}, {name: '大鼎世纪楼宇综合党委', point: [104.075434, 30.602206], labelMarker: true}, {name: '中航城市楼宇综合党委', point: [104.063847, 30.593599], labelMarker: true}, {name: '特拉克斯楼宇综合党委', point: [104.075906, 30.593858], labelMarker: true}, {name: '中航国际楼宇综合党委', point: [104.064147, 30.585952], labelMarker: true}, {name: '银泰中心楼宇综合党委', point: [104.072902, 30.581888], labelMarker: true}, {name: '奥克斯-拉德方斯楼宇综合党委', point: [104.064147, 30.578895], labelMarker: true}, {name: '环球中心楼宇综合党委', point: [104.064319, 30.571727], labelMarker: true}, {name: '交子金融中心综合党委', point: [104.070971, 30.570545], labelMarker: true}, {name: '联治街区综合党委            （天府一、二街）', point: [104.062302, 30.555838], labelMarker: true}, {name: '会展片区楼宇综合党委', point: [104.074661, 30.555653], labelMarker: true}, {name: '联创街区综合党委（天府二、三街）', point: [104.063117, 30.549185], labelMarker: true}, {name: '联育街区综合党委（天府三、四街）', point: [104.063246, 30.544566], labelMarker: true}, {name: '联享街区综合党委（天府四、五街）', point: [104.062516, 30.538208], labelMarker: true}, {name: '软件园园区综合党委', point: [104.071614, 30.544713], labelMarker: true}, {name: '大源综合党委', point: [104.028141, 30.549481], labelMarker: true}],
-        communityPartyCoordinates: [{name: '新南社区', point: [104.06646, 30.600481], labelMarker: true}, {name: '永安社区', point: [104.071906, 30.590858], labelMarker: true}, {name: '益州社区', point: [104.066147, 30.577095], labelMarker: true}, {name: '月牙湖社区', point: [104.068302, 30.553438], labelMarker: true}, {name: '吉泰社区', point: [104.068246, 30.540566], labelMarker: true}, {name: '昆华社区', point: [104.038541, 30.559481], labelMarker: true}, {name: '大源社区', point: [104.038641, 30.552481], labelMarker: true}, {name: '临江社区', point: [104.029941, 30.547481], labelMarker: true}, {name: '科创社区', point: [104.036941, 30.532481], labelMarker: true}, {name: '和平社区', point: [104.077434, 30.605206], labelMarker: true}, {name: '三瓦窑社区', point: [104.080974, 30.598906], labelMarker: true}, {name: '交子公园社区', point: [104.074902, 30.576688], labelMarker: true}, {name: '天华社区', point: [104.073614, 30.546713], labelMarker: true}],
-        leftComprehensiveLabels: ['新南商圈综合党委', '中航城市楼宇综合党委', '中航国际楼宇综合党委', '奥克斯-拉德方斯楼宇综合党委', '环球中心楼宇综合党委', '联治街区综合党委            （天府一、二街）', '联创街区综合党委（天府二、三街）', '联育街区综合党委（天府三、四街）', '联享街区综合党委（天府四、五街）', '大源综合党委'],
-        rightComprehensiveLabels: ['大鼎世纪楼宇综合党委', '特拉克斯楼宇综合党委', '银泰中心楼宇综合党委', '交子金融中心综合党委', '会展片区楼宇综合党委', '软件园园区综合党委'],
-        leftCommunityLables: ['新南社区', '永安社区', '益州社区', '月牙湖社区', '吉泰社区', '昆华社区', '大源社区', '临江社区', '科创社区'],
-        rightCommunityLables: ['和平社区', '三瓦窑社区', '交子公园社区', '天华社区'],
+        partyCoordinates: [{name: '百花潭公园', point: [104.028799, 30.657415], labelMarker: true}, {name: '鹭岛国际社区', point: [104.012319, 30.644419], labelMarker: true}, {name: '成都花园', point: [104.012319, 30.656529], labelMarker: true}, {name: '肖家河', point: [104.045278, 30.631274], labelMarker: true}, {name: '四川武侯中学', point: [104.010431, 30.603205], labelMarker: true}, {name: '四川大学望江校区', point: [104.083044, 30.629797], labelMarker: true}, {name: '万达广场', point: [103.999788, 30.620195], labelMarker: true}, {name: '伊藤洋华堂', point: [104.022104, 30.645896], labelMarker: true}],
+        communityPartyCoordinates: [{name: '百花潭公园', point: [104.028799, 30.657415], labelMarker: true}, {name: '鹭岛国际社区', point: [104.012319, 30.644419], labelMarker: true}, {name: '成都花园', point: [104.012319, 30.656529], labelMarker: true}, {name: '肖家河', point: [104.045278, 30.631274], labelMarker: true}, {name: '四川武侯中学', point: [104.010431, 30.603205], labelMarker: true}, {name: '四川大学望江校区', point: [104.083044, 30.629797], labelMarker: true}, {name: '万达广场', point: [103.999788, 30.620195], labelMarker: true}, {name: '伊藤洋华堂', point: [104.022104, 30.645896], labelMarker: true}],
+        leftComprehensiveLabels: ['百花潭公园', '鹭岛国际社区', '成都花园', '肖家河'],
+        rightComprehensiveLabels: ['四川武侯中学', '四川大学望江校区', '万达广场', '伊藤洋华堂'],
+        leftCommunityLables: ['四川武侯中学', '四川大学望江校区', '万达广场', '伊藤洋华堂'],
+        rightCommunityLables: ['百花潭公园', '鹭岛国际社区', '成都花园', '肖家河'],
         fireFightingMarkers: [],
         dangerousChemicalMarkers: [],
         comprehensiveBuildingMarkerInitaled: false,
@@ -70,7 +94,7 @@ export const map = {
         labelMarkerInitialed: true,
         leftLabelsConfig: {offset: [-2, 4], options: {anchor: 'middle-left'}},
         rightLabelsConfig: {offset: [-12, 4], options: {anchor: 'middle-left'}},
-        mapOptions: '{mask: guixiGeojson.features[0].geometry.coordinates, zoom: 13, zooms: [12, 18], center: [104.07, 30.57]}',
+        mapOptions: '{zoom: 13, zooms: [12, 18], center: [103.882541, 30.820226]}',
         currentPartyItem: {},
         partyDetailData: '',
         communityPartyListData: '',
