@@ -171,10 +171,14 @@ module.exports = {
     {
       id: 'minimize',
       value: false
+    },
+    {
+      id: 'companyBuildingData',
+      value: []
     }
   ],
   components: [
+    map,
     companySelect,
-    map
   ]
 }

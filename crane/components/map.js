@@ -11,8 +11,11 @@ module.exports = {
     method: 'get',
     $data: "[['']]",
   },
-  exports: {
-    results: 'results',
+  events: {
+    requestDone: {
+      params: ['param'],
+      actions: ["setState('companyBuildingData', param.results ? param.results.map(i => ({name: i[0], point: i[1], labelMarker: true})) : [])",],
+    },
   },
   children: [
     {
@@ -94,7 +97,7 @@ module.exports = {
               component: '@byzanteam/map-ui/custom-marker',
               id: 'fireFightingBuildingMarker',
               vfor: {
-                $data: "results.map(item => ({name: item[0], point: item[1], labelMarker: true}))",
+                data: "craneStates.companyBuildingData",
                 exports: {item: 'marker', index: 'index'},
                 key: 'index + marker.point[0] + marker.point[1] + marker.tag + marker.name'
               },
@@ -132,7 +135,7 @@ module.exports = {
               component: '@byzanteam/map-ui/custom-marker',
               id: 'dangerousChemicalBuildingMarker',
               vfor: {
-                $data: "results.map(item => ({name: item[0], point: item[1], labelMarker: true}))",
+                data: "craneStates.companyBuildingData",
                 exports: {item: 'marker', index: 'index'},
                 key: 'marker.point[0] + marker.point[1] + marker.tag + marker.name + index'
               },
