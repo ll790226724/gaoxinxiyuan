@@ -104,7 +104,7 @@ module.exports = {
               events: {
                 'marker-clicked': {
                   params: ['marker'],
-                  actions: ["setMarkerZindex(marker, 200)", "setState('currentBuilding', marker.target.getExtData().name)", "setState('currentCompanyTag', marker.target.getExtData().tag)", "setState('currentParty', marker.target.getExtData().party)", "setState('departmentSelected', false)", "setState('showDetail', true)"]
+                  actions: ["setMarkerZindex(marker, 200)", "setState('currentBuilding', marker.target.getExtData().name)", "setState('currentCompanyTag', marker.target.getExtData().tag)", "setState('departmentSelected', false)", "setState('showDetail', true)"]
                 },
                 'marker-mouseover': {
                   params: ["marker"],
@@ -117,9 +117,9 @@ module.exports = {
               },
               props: {
                 $marker: "marker",
-                anchor: 'bottom-center',
-                $zIndex: "craneStates.currentBuilding === marker.name ? 300 : 100",
-                $content: "`<div style='display: flex; align-items: center; flex-direction: column; justify-content: center;'><div class='building-marker-label ${ craneStates.currentBuilding === marker.name ? 'selected' : ''}'>${marker.name ? marker.name : '未命名'}</div><img style='height: 32px; width: 32px;' src='https://slp-qiniu-beta.skylarkly.com/FhA38Er8OX2N384utu196Dph1mru'/></div>`"
+                $offset: 'craneStates.leftLabelsConfig.offset',
+                $anchor: "craneStates.leftLabelsConfig.options.anchor",
+                $content: "`<div style='display: flex; align-items: center; transform: rotate(180deg); transform-origin: 0;'><img style='height: 10px;' src='https://slp-qiniu-beta.skylarkly.com/Fj3dfxguTdyghUKmWIHSMsVDpBiY'/><div class='label-marker' style='transform: rotate(180deg);'>${marker.name}</div></div>`"
               }
             },
           ]
@@ -142,7 +142,7 @@ module.exports = {
               events: {
                 'marker-clicked': {
                   params: ['marker'],
-                  actions: ["setMarkerZindex(marker, 200)", "setState('currentBuilding', marker.target.getExtData().name)", "setState('currentCompanyTag', marker.target.getExtData().tag)", "setState('currentParty', marker.target.getExtData().name === '天华社区' ? `中共成都高新技术产业开发区桂溪街道${marker.target.getExtData().party}第一支部委员会` : `中共成都高新技术产业开发区桂溪街道${marker.target.getExtData().party}委员会`)", "setState('departmentSelected', false)", "setState('showDetail', true)"]
+                  actions: ["setMarkerZindex(marker, 200)", "setState('currentBuilding', marker.target.getExtData().name)", "setState('currentCompanyTag', marker.target.getExtData().tag)",  "setState('departmentSelected', false)", "setState('showDetail', true)"]
                 },
                 'marker-mouseover': {
                   params: ["marker"],
@@ -155,9 +155,9 @@ module.exports = {
               },
               props: {
                 $marker: "marker",
-                anchor: 'bottom-center',
-                $zIndex: "craneStates.currentBuilding === marker.name ? 300 : 100",
-                $content: "`<div style='display: flex; align-items: center; flex-direction: column; justify-content: center;'><div class='building-marker-label ${ craneStates.currentBuilding === marker.name ? 'selected' : ''}'>${marker.name ? marker.name : '未命名'}</div><img style='height: 32px; width: 32px;' src='https://slp-qiniu-beta.skylarkly.com/FmOXOMD2Kzjaoqu1t_dgKjfHNmwB'/></div>`"
+                $offset: 'craneStates.leftLabelsConfig.offset',
+                $anchor: "craneStates.leftLabelsConfig.options.anchor",
+                $content: "`<div style='display: flex; align-items: center; transform: rotate(180deg); transform-origin: 0;'><img style='height: 10px;' src='https://slp-qiniu-beta.skylarkly.com/Fj3dfxguTdyghUKmWIHSMsVDpBiY'/><div class='label-marker' style='transform: rotate(180deg);'>${marker.name}</div></div>`"
               }
             }
           ]
