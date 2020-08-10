@@ -1,25 +1,27 @@
 <template>
   <div class="image-preview">
     <div class="preview" v-for="(url,index) in imgs" :key="url+index">
-      <img :src="url" class="image" v-viewer="options" />
-      <div class="mask">
-        <img src="/gaoxinxiyuan/images/icon/search-plus-circle.svg" @click="preview" />
-        <img src="/gaoxinxiyuan/images/icon/download-circle.svg" @click="downloadImg(url)" />
-      </div>
+      <template v-if="url">
+        <img :src="url" class="image" v-viewer="options" />
+        <div class="mask">
+          <img src="/gaoxinxiyuan/images/icon/search-plus-circle.svg" @click="preview" />
+          <img src="/gaoxinxiyuan/images/icon/download-circle.svg" @click="downloadImg(url)" />
+        </div>
+      </template>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ImageView',
+  name: "ImageView",
   props: {
     imgs: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
-  data () {
+  data() {
     return {
       options: {
         movable: false,
@@ -27,23 +29,23 @@ export default {
         navbar: false,
         title: false,
         scalable: false,
-        transition: false
-      }
-    }
+        transition: false,
+      },
+    };
   },
   methods: {
-    preview () {
-      const viewer = this.$el.querySelector('.image').$viewer
-      viewer.show()
+    preview() {
+      const viewer = this.$el.querySelector(".image").$viewer;
+      viewer.show();
     },
-    downloadImg (url) {
-      const a = document.createElement('a')
-      a.download = 'image'
-      a.href = url
-      a.click()
-    }
-  }
-}
+    downloadImg(url) {
+      const a = document.createElement("a");
+      a.download = "image";
+      a.href = url;
+      a.click();
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -91,11 +93,18 @@ export default {
 .viewer-reset,
 .viewer-prev,
 .viewer-play,
-.viewer-next {
+.viewer-next,
+.viewer-button {
   display: none;
 }
 
-.viewer-footer{
+.viewer-footer {
   bottom: 60px !important;
+}
+
+.viewer-canvas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
