@@ -2,15 +2,21 @@
   <div class="enterprise_detail">
     <img ref="background" src="/gaoxinxiyuan/images/dialo-bg.png" :style="{position: 'absolute', top: '0px', left: '0px'}" />
     <img src="/gaoxinxiyuan/images/icon/times-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '48px'}" />
-    <div :style="{width: '524px', height: '28px', color: '#fff', fontSize: '28px', lineHeight: '28px', fontWeight: '600', position: 'absolute', top: '130px', left: '88px'}">
-      成都泰美克晶体技术有限公司
-    </div>
+    <div :style="{width: '524px', height: '28px', color: '#fff', fontSize: '28px', lineHeight: '28px', fontWeight: '600', position: 'absolute', top: '130px', left: '88px'}" v-text="craneStates.enterpriseName" />
+    <data-loader ref="enterpriseData" v-slot="{ results: results }" url="/v1/components/0027dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data" :style="{width: '618px', height: '848px', border: '1px solid rgba(255, 255, 255, .1)', overflow: 'hidden', position: 'absolute', top: '204px', left: '32px'}" :params="{name: craneStates.enterpriseName}">
+      <ul ref="enterpriseTable" :style="{height: '100%', overflowY: 'scroll'}" class="enterprise-table">
+        <li v-for="(item, key) in craneStates.tableHeader" :key="key" :style="{display: 'flex', fontSize: '20px', fontWeight: '500', lineHeight: '30px'}">
+          <div v-text="item.value" :style="{width: '182px', flexShrink: '0', verticalAlign: 'top', color: '#acb2c4', borderRight: '1px solid rgba(255, 255, 255, .1)', padding: '24px 16px'}" />
+          <div v-text="results&&results[0][key]" :style="{flex: '1', color: '#fff', flexShrink: '0', verticalAlign: 'top', padding: '24px 16px'}" />
+        </li>
+      </ul>
+    </data-loader>
     <img src="/gaoxinxiyuan/images/icon/lightning-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '692px'}" />
     <div :style="{width: '498px', height: '26px', color: '#fff', fontSize: '26px', lineHeight: '26px', fontWeight: '400', position: 'absolute', top: '131px', left: '732px'}">
       应急救援情况（含应急方案图）
     </div>
     <img src="/gaoxinxiyuan/images/icon/flamethrower-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '1310px'}" />
-    <div :style="{width: '498px', height: '20px', color: '#fa6400', fontSize: '20px', lineHeight: '20px', fontWeight: '400', position: 'absolute', top: '131px', left: '1350px'}">
+    <div :style="{width: '498px', height: '26px', color: '#fa6400', fontSize: '20px', lineHeight: '26px', fontWeight: '400', position: 'absolute', top: '131px', left: '1350px'}">
       危化品平面位置摆放图（含应急出口）
     </div>
   </div>
@@ -18,17 +24,22 @@
 
 <script>
 import BuiltInMixin from '../mixins/built_in'
+import {
+  DataLoader,
+} from '@byzanteam/vis-components'
 
 export const enterprise_detail = {
   mixins: [BuiltInMixin],
 
   components: {
+    DataLoader,
   },
 
   data () {
     return {
       craneStates: {
-        test: '',
+        tableHeader: [{field: 'company_name', value: '企业名称'}, {field: 'registered_address', value: '注册地址'}, {field: 'actual_address', value: '实际地址'}, {field: 'industry', value: '行业领域'}, {field: 'main_business', value: '主营业务'}, {field: 'header_name', value: '单位负责人姓名'}, {field: 'header_phone', value: '单位负责人电话'}, {field: 'area', value: '场地总面积'}, {field: 'number', value: '从业人数（人）'}, {field: 'security_name', value: '安全负责人姓名'}, {field: 'sucurity_phone', value: '安全负责人电话'}],
+        enterpriseName: '成都天马微电子有限公司',
       },
     }
   },

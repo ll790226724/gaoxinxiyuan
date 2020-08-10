@@ -17,10 +17,10 @@ module.exports = [
         props: {
             $style: {
                 width: '498px',
-                height: '20px',
+                height: '26px',
                 color: '#fa6400',
                 fontSize: '20px',
-                lineHeight: '20px',
+                lineHeight: '26px',
                 fontWeight: '400',
             }
         }

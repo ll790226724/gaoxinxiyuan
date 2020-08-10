@@ -1,3 +1,4 @@
+const enterpriseTable = require('./enterprise-table')
 module.exports = [
     {
         component: 'img',
@@ -13,7 +14,6 @@ module.exports = [
     {
         component: 'div',
         position: [88, 130],
-        content: '成都泰美克晶体技术有限公司',
         props: {
             $style: {
                 width: '524px',
@@ -22,7 +22,9 @@ module.exports = [
                 fontSize: '28px',
                 lineHeight: '28px',
                 fontWeight: '600',
-            }
+            },
+            'v-text': 'craneStates.enterpriseName'
         }
     },
+    enterpriseTable,
 ]
