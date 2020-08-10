@@ -18,8 +18,8 @@ module.exports = [
             $style: {
                 width: '498px',
                 height: '26px',
-                color: '#fa6400',
-                fontSize: '20px',
+                color: '#fff',
+                fontSize: '26px',
                 lineHeight: '26px',
                 fontWeight: '400',
             }

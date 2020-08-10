@@ -15,8 +15,22 @@
     <div :style="{width: '498px', height: '26px', color: '#fff', fontSize: '26px', lineHeight: '26px', fontWeight: '400', position: 'absolute', top: '131px', left: '732px'}">
       应急救援情况（含应急方案图）
     </div>
+    <img src="/gaoxinxiyuan/images/icon/user-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '913px', left: '712px'}" />
+    <img src="/gaoxinxiyuan/images/line.png" :style="{width: '19px', height: '120px', position: 'absolute', top: '860px', left: '757px'}" />
+    <div :style="{position: 'absolute', top: '850px', left: '787px'}">
+      <div v-for="(item, key) in craneStates.safetyOfficerData" :key="key" :style="{marginBottom: '40px'}">
+        <data-loader v-slot="{ results: results }" :url="reqUrl(item.id)" :params="{name: craneStates.enterpriseName}">
+          <div :style="{display: 'flex', height: '20px', alignItems: 'center', marginBottom: '40px', fontSize: '20px', lineHeight: '20px', fontWeight: '400'}">
+            <div v-text="item.type" :style="{width: '144px', marginRight: '16px', color: '#fa6400'}" />
+            <div v-text="results && results[0][0]" :style="{width: '80px', color: '#fff'}" />
+            <div :style="{width: '1px', height: '12px', backgroundColor: '#fff'}" />
+            <div v-text="results && results[0][1]" :style="{width: '80px', color: '#fff'}" />
+          </div>
+        </data-loader>
+      </div>
+    </div>
     <img src="/gaoxinxiyuan/images/icon/flamethrower-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '1310px'}" />
-    <div :style="{width: '498px', height: '26px', color: '#fa6400', fontSize: '20px', lineHeight: '26px', fontWeight: '400', position: 'absolute', top: '131px', left: '1350px'}">
+    <div :style="{width: '498px', height: '26px', color: '#fff', fontSize: '26px', lineHeight: '26px', fontWeight: '400', position: 'absolute', top: '131px', left: '1350px'}">
       危化品平面位置摆放图（含应急出口）
     </div>
   </div>
@@ -40,9 +54,18 @@ export const enterprise_detail = {
       craneStates: {
         tableHeader: [{field: 'company_name', value: '企业名称'}, {field: 'registered_address', value: '注册地址'}, {field: 'actual_address', value: '实际地址'}, {field: 'industry', value: '行业领域'}, {field: 'main_business', value: '主营业务'}, {field: 'header_name', value: '单位负责人姓名'}, {field: 'header_phone', value: '单位负责人电话'}, {field: 'area', value: '场地总面积'}, {field: 'number', value: '从业人数（人）'}, {field: 'security_name', value: '安全负责人姓名'}, {field: 'sucurity_phone', value: '安全负责人电话'}],
         enterpriseName: '成都天马微电子有限公司',
+        safetyOfficerData: [{id: '0047dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全总负责人'}, {id: '0057dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全第一负责人'}, {id: '0067dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全第二负责人'}],
       },
     }
   },
+
+  computed: {
+    reqUrl(id){
+      return function(id){
+        return `/v1/components/${id}/data`
+      }
+    }
+  }
 }
 export default enterprise_detail
 </script>

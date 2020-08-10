@@ -1,3 +1,4 @@
+const safetyOfficer = require('./safety-officer')
 module.exports = [
     {
         component: 'img',
@@ -25,4 +26,5 @@ module.exports = [
             }
         }
     },
+    ...safetyOfficer,
 ]

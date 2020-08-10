@@ -1,6 +1,6 @@
 const enterprise = require('./enterprise')
 const rescueSituation = require('./rescue-situation')
-const hazardousChemicals = require('./ hazardous-chemicals')
+const hazardousChemicals = require('./hazardous-chemicals')
 module.exports = {
     route: {
         name: 'enterprise_detail',
@@ -59,6 +59,23 @@ module.exports = {
         {
             id: 'enterpriseName',
             value: '成都天马微电子有限公司',
+        },
+        {
+            id: 'safetyOfficerData',
+            value: [
+                {
+                    id: '0047dd5e-d3ff-4c5f-9ab4-44d75afb40a1',
+                    type: '安全总负责人',
+                },
+                {
+                    id: '0057dd5e-d3ff-4c5f-9ab4-44d75afb40a1',
+                    type: '安全第一负责人',
+                },
+                {
+                    id: '0067dd5e-d3ff-4c5f-9ab4-44d75afb40a1',
+                    type: '安全第二负责人',
+                },
+            ]
         }
     ],
     components: [
