@@ -48,9 +48,7 @@ export default {
 
 <style lang="scss" scoped>
 .image-preview {
-  width: 458px;
-  height: 596px;
-  overflow-y: scroll;
+  width: 100%;
   .preview {
     position: relative;
     width: 100%;
@@ -95,5 +93,9 @@ export default {
 .viewer-play,
 .viewer-next {
   display: none;
+}
+
+.viewer-footer{
+  bottom: 60px !important;
 }
 </style>

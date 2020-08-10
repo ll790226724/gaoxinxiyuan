@@ -36,6 +36,11 @@ module.exports = [
             $params: {
                 $name: 'craneStates.enterpriseName'
             },
+            $style: {
+                width: '466px',
+                height: '596px',
+                overflowY: 'scroll',
+            }
         },
         children: [
             {

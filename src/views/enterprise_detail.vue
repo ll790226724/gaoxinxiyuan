@@ -29,14 +29,14 @@
         </data-loader>
       </div>
     </div>
-    <data-loader v-slot="{ results: results }" url="/v1/components/0137dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data" :params="{name: craneStates.enterpriseName}" :style="{position: 'absolute', top: '204px', left: '732px'}">
+    <data-loader v-slot="{ results: results }" url="/v1/components/0137dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data" :params="{name: craneStates.enterpriseName}" :style="{width: '466px', height: '596px', overflowY: 'scroll', position: 'absolute', top: '204px', left: '732px'}">
       <image-view :imgs="results && results[0]" />
     </data-loader>
     <img src="/gaoxinxiyuan/images/icon/flamethrower-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '1310px'}" />
     <div :style="{width: '498px', height: '26px', color: '#fff', fontSize: '26px', lineHeight: '26px', fontWeight: '400', position: 'absolute', top: '131px', left: '1350px'}">
       危化品平面位置摆放图（含应急出口）
     </div>
-    <data-loader v-slot="{ results: results }" url="/v1/components/0177dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data" :params="{name: craneStates.enterpriseName}" :style="{position: 'absolute', top: '204px', left: '1350px'}">
+    <data-loader v-slot="{ results: results }" url="/v1/components/0177dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data" :params="{name: craneStates.enterpriseName}" :style="{width: '466px', height: '596px', overflowY: 'scroll', position: 'absolute', top: '204px', left: '1350px'}">
       <image-view :imgs="results && results[0]" />
     </data-loader>
   </div>
