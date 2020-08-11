@@ -93,8 +93,7 @@ export default {
 .viewer-reset,
 .viewer-prev,
 .viewer-play,
-.viewer-next,
-.viewer-button {
+.viewer-next {
   display: none;
 }
 
