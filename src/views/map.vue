@@ -79,7 +79,7 @@ export const map = {
         labelMarkerInitialed: true,
         leftLabelsConfig: {offset: [-2, 4], options: {anchor: 'middle-left'}},
         rightLabelsConfig: {offset: [-12, 4], options: {anchor: 'middle-left'}},
-        mapOptions: '{zoom: 13, zooms: [12, 18], center: [103.882541, 30.820226]}',
+        mapOptions: {zoom: 14, zooms: [12, 18], center: [103.882541, 30.820226]},
         companyBuildingData: [],
       },
     }

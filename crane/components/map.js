@@ -30,7 +30,7 @@ module.exports = {
         {
           component: 'div',
           props: {
-            'v-if': "craneStates.currentCompanyTag !== 'dangerousChemical'"
+            'v-if': "craneStates.currentCompanyTag === 'fireFighting'"
           },
           children: [
             {
@@ -66,7 +66,7 @@ module.exports = {
         {
           component: 'div',
           props: {
-            'v-if': "craneStates.currentCompanyTag !== 'fireFighting'"
+            'v-if': "craneStates.currentCompanyTag === 'dangerousChemical'"
           },
           children: [
             {
