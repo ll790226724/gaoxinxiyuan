@@ -9,7 +9,12 @@ module.exports = [
                 width: '24px',
                 height: '24px',
             }
-        }
+        },
+        events: {
+            'click': {
+                actions: ["setState('showState', !craneStates.showState)"]
+            }
+        },
     },
     {
         component: 'div',

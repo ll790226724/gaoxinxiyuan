@@ -8,6 +8,14 @@ module.exports = {
     },
     states: [
         {
+            id: 'showState',
+            value: true,
+        },
+        {
+            id: 'enterpriseName',
+            value: '成都中光电科技有限公司',
+        },
+        {
             id: 'tableHeader',
             value: [
                 {
@@ -57,10 +65,6 @@ module.exports = {
             ]
         },
         {
-            id: 'enterpriseName',
-            value: '成都中光电科技有限公司',
-        },
-        {
             id: 'safetyOfficerData',
             value: [
                 {
@@ -76,23 +80,32 @@ module.exports = {
                     type: '安全第二负责人',
                 },
             ]
-        }
+        },
     ],
     components: [
         {
-            id: 'background',
-            component: 'img',
-            position: [32, 84],
-            props: {
-                src: '/gaoxinxiyuan/images/dialo-bg.png',
-                $style: {
-                    width: 'calc(100% - 64px)',
-                    height: 'auto',
-                }
+            id: 'enterprise-detail',
+            component: 'div',
+            directive: {
+                show: 'craneStates.showState',
             },
+            children: [
+                {
+                    id: 'background',
+                    component: 'img',
+                    position: [32, 84],
+                    props: {
+                        src: '/gaoxinxiyuan/images/dialo-bg.png',
+                        $style: {
+                            width: 'calc(100% - 64px)',
+                            height: 'auto',
+                        }
+                    },
+                },
+                ...enterprise,
+                ...rescueSituation,
+                ...hazardousChemicals,
+            ]
         },
-        ...enterprise,
-        ...rescueSituation,
-        ...hazardousChemicals,
     ],
 }
