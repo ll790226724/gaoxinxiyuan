@@ -1,18 +1,19 @@
 <template>
   <div class="map">
-    <data-loader @requestDone="(param)=>[setState('companyBuildingData', param.results ? param.results.map(item => ({name: item[0], point: [item[1][1], item[1][0]], labelMarker: true})) : [])]" :style="{transform: `scale(${1/getMapScale()})`, width: '100%', height: '100%', position: 'absolute', top: '0px', left: '0px'}" :url="`/v1/components/${craneStates.currentCompanyTag === 'fireFighting' ? '0007dd5e-d3ff-4c5f-9ab4-44d75afb40a1' : '0107dd5e-d3ff-4c5f-9ab4-44d75afb40a1'}/data`" method="get" :data="[['']]">
+    <data-loader @requestDone="(param)=>[setState('companyBuildingData', param.results ? param.results.map(item => ({name: item[0], point: [item[1][1], item[1][0]], labelMarker: true, })) : [])]" :style="{transform: `scale(${1/getMapScale()})`, width: '100%', height: '100%', position: 'absolute', top: '0px', left: '0px'}" :url="`/v1/components/${labelMarkerRequestUrl}/data`" method="get" :data="[['']]">
       <base-map ref="map" :mapOptions="craneStates.mapOptions" :satellite="true">
-        <div v-if="craneStates.currentCompanyTag !== 'dangerousChemical'">
+        <div v-if="craneStates.currentCompanyTag === 'fireFighting'">
+          <data-loader v-slot="{ results: results }" :url="`/v1/components/0007dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data`" method="get" :data="[['']]" />
           <regions ref="fireFightingRegions" @area-clicked="(geoJSON, area)=>[setState('selectedArea', area), setState('currentCompanyTag', 'fireFighting'), setState('showDetail', true)]" :areas="fireFightingCompany.features" :areaStyle="craneStates.fireFightingAreaStyle" :areaHoverStyle="craneStates.fireFightingHoverStyle" />
         </div>
-        <div v-if="craneStates.currentCompanyTag !== 'fireFighting'">
+        <div v-if="craneStates.currentCompanyTag === 'dangerousChemical'">
           <regions ref="fireFightingRegions" @area-clicked="(geoJSON, area)=>[setState('selectedArea', area), setState('currentCompanyTag', 'dangerousChemical'), setState('showDetail', true)]" :areas="dangerousChemicalCompany.features" :areaStyle="craneStates.dangerousChemicalAreaStyle" :areaHoverStyle="craneStates.dangerousChemicalHoverStyle" />
         </div>
         <div v-if="fireFightingMarkerShow">
-          <custom-marker ref="fireFightingBuildingMarker" v-for="(marker, index) in craneStates.companyBuildingData" :key="index + marker.point[0] + marker.point[1] + marker.tag + marker.name" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentBuilding', marker.target.getExtData().name), setState('currentCompanyTag', marker.target.getExtData().tag), setState('showDetail', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" :offset="craneStates.leftLabelsConfig.offset" :anchor="craneStates.leftLabelsConfig.options.anchor" :content="`<div style='display: flex; align-items: center; transform: rotate(180deg); transform-origin: 0;'><img style='height: 10px;' src='https://slp-qiniu-beta.skylarkly.com/Fj3dfxguTdyghUKmWIHSMsVDpBiY'/><div class='label-marker' style='transform: rotate(180deg);'>${marker.name}</div></div>`" />
+          <custom-marker ref="fireFightingBuildingMarker" v-for="(marker, index) in craneStates.companyBuildingData" :key="index + marker.point[0] + marker.point[1] + marker.tag + marker.name" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentBuilding', marker.target.getExtData().name), setState('currentCompanyTag', marker.target.getExtData().tag), setState('showDetail', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" :offset="craneStates.leftLabelsConfig.offset" :anchor="craneStates.leftLabelsConfig.options.anchor" :content="`<div style='display: flex; align-items: center;'><img style='height: 10px;' src='https://slp-qiniu-beta.skylarkly.com/Fj3dfxguTdyghUKmWIHSMsVDpBiY'/><div class='label-marker'>${marker.name}</div></div>`" />
         </div>
         <div v-if="dangerousChemicalMarkerShow">
-          <custom-marker ref="dangerousChemicalBuildingMarker" v-for="(marker, index) in craneStates.companyBuildingData" :key="marker.point[0] + marker.point[1] + marker.tag + marker.name + index" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentBuilding', marker.target.getExtData().name), setState('currentCompanyTag', marker.target.getExtData().tag), setState('showDetail', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" :offset="craneStates.leftLabelsConfig.offset" :anchor="craneStates.leftLabelsConfig.options.anchor" :content="`<div style='display: flex; align-items: center; transform: rotate(180deg); transform-origin: 0;'><img style='height: 10px;' src='https://slp-qiniu-beta.skylarkly.com/Fj3dfxguTdyghUKmWIHSMsVDpBiY'/><div class='label-marker' style='transform: rotate(180deg);'>${marker.name}</div></div>`" />
+          <custom-marker ref="dangerousChemicalBuildingMarker" v-for="(marker, index) in craneStates.companyBuildingData" :key="marker.point[0] + marker.point[1] + marker.tag + marker.name + index" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentBuilding', marker.target.getExtData().name), setState('currentCompanyTag', marker.target.getExtData().tag), setState('showDetail', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" :offset="craneStates.leftLabelsConfig.offset" :anchor="craneStates.leftLabelsConfig.options.anchor" :content="`<div style='display: flex; align-items: center;'><img style='height: 10px;' src='https://slp-qiniu-beta.skylarkly.com/Fj3dfxguTdyghUKmWIHSMsVDpBiY'/><div class='label-marker'>${marker.name}</div></div>`" />
         </div>
       </base-map>
     </data-loader>
@@ -79,7 +80,7 @@ export const map = {
         labelMarkerInitialed: true,
         leftLabelsConfig: {offset: [-2, 4], options: {anchor: 'middle-left'}},
         rightLabelsConfig: {offset: [-12, 4], options: {anchor: 'middle-left'}},
-        mapOptions: {zoom: 14, zooms: [12, 18], center: [103.882541, 30.820226]},
+        mapOptions: {zoom: 16, zooms: [16, 18], center: [103.902752,30.768677]},
         companyBuildingData: [],
       },
     }
@@ -91,6 +92,13 @@ export const map = {
     },
     dangerousChemicalMarkerShow() {
       return this.craneStates.currentCompanyTag !== 'dangerousChemical'
+    },
+    labelMarkerRequestUrl() {
+      if(this.craneStates.currentCompanyTag === 'fireFighting') {
+        return '0007dd5e-d3ff-4c5f-9ab4-44d75afb40a1'
+      } else if(this.craneStates.currentCompanyTag === 'dangerousChemical') {
+        return '0107dd5e-d3ff-4c5f-9ab4-44d75afb40a1'
+      }
     }
   },
 

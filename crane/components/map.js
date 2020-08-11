@@ -7,14 +7,14 @@ module.exports = {
       width: "100%",
       height: "100%"
     },
-    $url: "`/v1/components/${craneStates.currentCompanyTag === 'fireFighting' ? '0007dd5e-d3ff-4c5f-9ab4-44d75afb40a1' : '0107dd5e-d3ff-4c5f-9ab4-44d75afb40a1'}/data`",
+    $url: "`/v1/components/${labelMarkerRequestUrl}/data`",
     method: 'get',
     $data: "[['']]",
   },
   events: {
     requestDone: {
       params: ['param'],
-      actions: ["setState('companyBuildingData', param.results ? param.results.map(item => ({name: item[0], point: [item[1][1], item[1][0]], labelMarker: true})) : [])",],
+      actions: ["setState('companyBuildingData', param.results ? param.results.map(item => ({name: item[0], point: [item[1][1], item[1][0]], labelMarker: true, })) : [])"],
     },
   },
   children: [
@@ -119,7 +119,7 @@ module.exports = {
                 $marker: "marker",
                 $offset: 'craneStates.leftLabelsConfig.offset',
                 $anchor: "craneStates.leftLabelsConfig.options.anchor",
-                $content: "`<div style='display: flex; align-items: center; transform: rotate(180deg); transform-origin: 0;'><img style='height: 10px;' src='https://slp-qiniu-beta.skylarkly.com/Fj3dfxguTdyghUKmWIHSMsVDpBiY'/><div class='label-marker' style='transform: rotate(180deg);'>${marker.name}</div></div>`"
+                $content: "`<div style='display: flex; align-items: center;'><img style='height: 10px;' src='https://slp-qiniu-beta.skylarkly.com/Fj3dfxguTdyghUKmWIHSMsVDpBiY'/><div class='label-marker'>${marker.name}</div></div>`"
               }
             },
           ]
@@ -157,7 +157,7 @@ module.exports = {
                 $marker: "marker",
                 $offset: 'craneStates.leftLabelsConfig.offset',
                 $anchor: "craneStates.leftLabelsConfig.options.anchor",
-                $content: "`<div style='display: flex; align-items: center; transform: rotate(180deg); transform-origin: 0;'><img style='height: 10px;' src='https://slp-qiniu-beta.skylarkly.com/Fj3dfxguTdyghUKmWIHSMsVDpBiY'/><div class='label-marker' style='transform: rotate(180deg);'>${marker.name}</div></div>`"
+                $content: "`<div style='display: flex; align-items: center;'><img style='height: 10px;' src='https://slp-qiniu-beta.skylarkly.com/Fj3dfxguTdyghUKmWIHSMsVDpBiY'/><div class='label-marker'>${marker.name}</div></div>`"
               }
             }
           ]
