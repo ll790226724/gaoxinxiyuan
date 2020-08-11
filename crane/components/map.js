@@ -14,7 +14,7 @@ module.exports = {
   events: {
     requestDone: {
       params: ['param'],
-      actions: ["setState('companyBuildingData', param.results ? param.results.map(i => ({name: i[0], point: i[1], labelMarker: true})) : [])",],
+      actions: ["setState('companyBuildingData', param.results ? param.results.map(item => ({name: item[0], point: [item[1][1], item[1][0]], labelMarker: true})) : [])",],
     },
   },
   children: [
@@ -104,7 +104,7 @@ module.exports = {
               events: {
                 'marker-clicked': {
                   params: ['marker'],
-                  actions: ["setMarkerZindex(marker, 200)", "setState('currentBuilding', marker.target.getExtData().name)", "setState('currentCompanyTag', marker.target.getExtData().tag)", "setState('departmentSelected', false)", "setState('showDetail', true)"]
+                  actions: ["setMarkerZindex(marker, 200)", "setState('currentBuilding', marker.target.getExtData().name)", "setState('currentCompanyTag', marker.target.getExtData().tag)",  "setState('showDetail', true)"]
                 },
                 'marker-mouseover': {
                   params: ["marker"],
@@ -142,7 +142,7 @@ module.exports = {
               events: {
                 'marker-clicked': {
                   params: ['marker'],
-                  actions: ["setMarkerZindex(marker, 200)", "setState('currentBuilding', marker.target.getExtData().name)", "setState('currentCompanyTag', marker.target.getExtData().tag)",  "setState('departmentSelected', false)", "setState('showDetail', true)"]
+                  actions: ["setMarkerZindex(marker, 200)", "setState('currentBuilding', marker.target.getExtData().name)", "setState('currentCompanyTag', marker.target.getExtData().tag)", "setState('showDetail', true)"]
                 },
                 'marker-mouseover': {
                   params: ["marker"],
