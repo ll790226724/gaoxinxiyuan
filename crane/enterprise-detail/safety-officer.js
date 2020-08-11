@@ -12,7 +12,7 @@ module.exports = [
     },
     {
         component: 'img',
-        position: [757, 860],
+        position: [752, 865],
         props: {
             src: '/gaoxinxiyuan/images/line.png',
             $style: {
@@ -33,7 +33,7 @@ module.exports = [
                 },
                 props: {
                     $style: {
-                        marginBottom: '40px',
+                        marginBottom: '32px',
                     }
                 },
                 children: [
@@ -42,7 +42,13 @@ module.exports = [
                         props: {
                             url: `/v1/components/id/data`,
                             $params: {
-                                $name: 'craneStates.enterpriseName'
+                                $name: 'craneStates.enterpriseName',
+                            },
+                            $style: {
+                                display: 'flex',
+                                alignItems: 'center',
+                                fontSize: '20px',
+                                fontWeight: '400',
                             },
                         },
                         exports: {
@@ -52,60 +58,45 @@ module.exports = [
                             {
                                 component: 'div',
                                 props: {
+                                    'v-text': 'item.type',
                                     $style: {
-                                        display: 'flex',
-                                        height: '20px',
-                                        alignItems: 'center',
-                                        marginBottom: '40px',
-                                        fontSize: '20px',
-                                        lineHeight: '20px',
-                                        fontWeight: '400',
+                                        width: '144px',
+                                        marginRight: '16px',
+                                        color: '#fa6400',
                                     }
-                                },
-                                children: [
-                                    {
-                                        component: 'div',
-                                        props: {
-                                            'v-text': 'item.type',
-                                            $style: {
-                                                width: '144px',
-                                                marginRight: '16px',
-                                                color: '#fa6400',
-                                            }
-                                        }
-                                    },
-                                    {
-                                        component: 'div',
-                                        props: {
-                                            'v-text': 'results && results[0][0]',
-                                            $style: {
-                                                width: '80px',
-                                                color: '#fff',
-                                            }
-                                        }
-                                    },
-                                    {
-                                        component: 'div',
-                                        props: {
-                                            $style: {
-                                                width: '1px',
-                                                height: '12px',
-                                                backgroundColor: '#fff'
-                                            }
-                                        }
-                                    },
-                                    {
-                                        component: 'div',
-                                        props: {
-                                            'v-text': 'results && results[0][1]',
-                                            $style: {
-                                                width: '80px',
-                                                color: '#fff',
-                                            }
-                                        }
-                                    },
-                                ]
-                            }
+                                }
+                            },
+                            {
+                                component: 'div',
+                                props: {
+                                    'v-text': 'results && results[0][0]',
+                                    $style: {
+                                        width: '80px',
+                                        color: '#fff',
+                                    }
+                                }
+                            },
+                            {
+                                component: 'div',
+                                props: {
+                                    $style: {
+                                        width: '1px',
+                                        height: '12px',
+                                        backgroundColor: '#fff',
+                                        margin: '0 12px',
+                                    }
+                                }
+                            },
+                            {
+                                component: 'div',
+                                props: {
+                                    'v-text': 'results && results[0][1]',
+                                    $style: {
+                                        width: '180px',
+                                        color: '#fff',
+                                    }
+                                }
+                            },
                         ]
                     }
                 ]

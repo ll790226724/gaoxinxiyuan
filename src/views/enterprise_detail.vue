@@ -16,16 +16,14 @@
       应急救援情况（含应急方案图）
     </div>
     <img src="/gaoxinxiyuan/images/icon/user-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '913px', left: '712px'}" />
-    <img src="/gaoxinxiyuan/images/line.png" :style="{width: '19px', height: '120px', position: 'absolute', top: '860px', left: '757px'}" />
+    <img src="/gaoxinxiyuan/images/line.png" :style="{width: '19px', height: '120px', position: 'absolute', top: '865px', left: '752px'}" />
     <div :style="{position: 'absolute', top: '850px', left: '787px'}">
-      <div v-for="(item, key) in craneStates.safetyOfficerData" :key="key" :style="{marginBottom: '40px'}">
-        <data-loader v-slot="{ results: results }" :url="reqUrl(item.id)" :params="{name: craneStates.enterpriseName}">
-          <div :style="{display: 'flex', height: '20px', alignItems: 'center', marginBottom: '40px', fontSize: '20px', lineHeight: '20px', fontWeight: '400'}">
-            <div v-text="item.type" :style="{width: '144px', marginRight: '16px', color: '#fa6400'}" />
-            <div v-text="results && results[0][0]" :style="{width: '80px', color: '#fff'}" />
-            <div :style="{width: '1px', height: '12px', backgroundColor: '#fff'}" />
-            <div v-text="results && results[0][1]" :style="{width: '80px', color: '#fff'}" />
-          </div>
+      <div v-for="(item, key) in craneStates.safetyOfficerData" :key="key" :style="{marginBottom: '32px'}">
+        <data-loader v-slot="{ results: results }" :url="reqUrl(item.id)" :params="{name: craneStates.enterpriseName}" :style="{display: 'flex', alignItems: 'center', fontSize: '20px', fontWeight: '400'}">
+          <div v-text="item.type" :style="{width: '144px', marginRight: '16px', color: '#fa6400'}" />
+          <div v-text="results && results[0][0]" :style="{width: '80px', color: '#fff'}" />
+          <div :style="{width: '1px', height: '12px', backgroundColor: '#fff', margin: '0 12px'}" />
+          <div v-text="results && results[0][1]" :style="{width: '180px', color: '#fff'}" />
         </data-loader>
       </div>
     </div>
