@@ -3,7 +3,7 @@
     <data-loader @requestDone="(param)=>[setState('companyBuildingData', param.results ? param.results.map(item => ({name: item[0], point: [item[1][1], item[1][0]], labelMarker: true, })) : [])]" :style="{transform: `scale(${1/getMapScale()})`, width: '100%', height: '100%', position: 'absolute', top: '0px', left: '0px'}" :url="`/v1/components/${labelMarkerRequestUrl}/data`" method="get" :data="[['']]">
       <base-map ref="map" :mapOptions="craneStates.mapOptions" :satellite="true">
         <div v-if="craneStates.currentCompanyTag === 'fireFighting'">
-          <regions ref="fireFightingRegions" @area-clicked="(geoJSON, area)=>[setState('selectedArea', area), setState('showDetail', true), getName(geoJSON, area)]" :areas="fireFightingCompany.features" :areaStyle="craneStates.fireFightingAreaStyle" :areaHoverStyle="craneStates.fireFightingAreaHoverStyle" />
+          <regions ref="fireFightingRegions" @area-clicked="(geoJSON, area)=>[setState('selectedArea', area), setState('showDetail', true)]" :areas="fireFightingCompany.features" :areaStyle="craneStates.fireFightingAreaStyle" :areaHoverStyle="craneStates.fireFightingAreaHoverStyle" />
         </div>
         <div v-if="craneStates.currentCompanyTag === 'dangerousChemical'">
           <regions ref="fireFightingRegions" @area-clicked="(geoJSON, area)=>[setState('selectedArea', area), setState('showDetail', true)]" :areas="dangerousChemicalCompany.features" :areaStyle="craneStates.dangerousChemicalAreaStyle" :areaHoverStyle="craneStates.dangerousChemicalHoverStyle" />
@@ -16,10 +16,18 @@
         </div>
       </base-map>
     </data-loader>
-    <data-loader ref="company_select" :style="{position: 'absolute', top: '32px', left: '32px'}">
-      <Select class="company-select" :filterable="true" :clearable="true" prefix="ios-search" :style="{width: '400px', height: '48px'}" v-model="craneStates.currentDepartment">
-        <Option v-for="(item, key) in craneStates.selectOptions" :key="key" :value="item.index" :label="item.name">
-          {{item.name}}
+    <data-loader ref="company_select" @requestDone="(params)=>[setState('selectAreaOptions', params.results ? params.results.map(item => ({name: item[0], address: item[1]})) : [])]" :url="`/v1/components/0017dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data`" method="get" :data="[['']]" :style="{position: 'absolute', top: '32px', left: '32px'}">
+      <Select class="company-select" :filterable="true" :clearable="true" prefix="ios-search" :style="{width: '400px', height: '48px'}" v-model="craneStates.currentCompany">
+        <Option v-for="(item, key) in craneStates.selectAreaOptions" :key="key" :value="item.index" :label="item.name">
+          <div class="company-name">
+            {{item.name}}
+          </div>
+          <div class="company-address">
+            <img src="/zhyq/icon/map-marker.svg" />
+            <span>
+              {{item.address}}
+            </span>
+          </div>
         </Option>
       </Select>
     </data-loader>
@@ -212,3 +220,9 @@ export const map = {
 }
 export default map
 </script>
+<style lang="scss">
+.company-name {
+
+}
+.company-address{}
+</style>

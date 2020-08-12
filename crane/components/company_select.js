@@ -25,20 +25,46 @@ module.exports = {
           width: '400px',
           height: '48px'
         },
-        'v-model': 'craneStates.currentDepartment'
+        'v-model': 'craneStates.currentCompany'
       },
       children: [
         {
           component: 'view-design/Option',
           vfor: {
-            data: "craneStates.selectOptions",
+            data: "craneStates.selectAreaOptions",
             exports: {item: 'item', index: 'key'}
           },
           props: {
             $value: "item.index",
             $label: "item.name"
           },
-          content: '{{item.name}}',
+          children: [
+            {
+              component: 'div',
+              props: {
+                class: 'company-name',
+              },
+              content: '{{item.name}}'
+            },
+            {
+              component: 'div',
+              props: {
+                class: 'company-address'
+              },
+              children: [
+                {
+                  component: 'img',
+                  props: {
+                    src: '/zhyq/icon/map-marker.svg'
+                  }
+                },
+                {
+                  component: 'span',
+                  content: '{{item.address}}'
+                }
+              ]
+            }
+          ]
         }
       ]
     }
