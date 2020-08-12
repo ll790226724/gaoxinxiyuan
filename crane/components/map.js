@@ -39,7 +39,7 @@ module.exports = {
               props: {
                 $areas: "fireFightingCompany.features",
                 $areaStyle: "craneStates.fireFightingAreaStyle",
-                $areaHoverStyle: "craneStates.fireFightingHoverStyle"
+                $areaHoverStyle: "craneStates.fireFightingAreaHoverStyle"
               },
               events: {
                 'area-clicked': {
