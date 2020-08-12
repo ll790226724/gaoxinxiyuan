@@ -3,7 +3,6 @@
     <data-loader @requestDone="(param)=>[setState('companyBuildingData', param.results ? param.results.map(item => ({name: item[0], point: [item[1][1], item[1][0]], labelMarker: true, })) : [])]" :style="{transform: `scale(${1/getMapScale()})`, width: '100%', height: '100%', position: 'absolute', top: '0px', left: '0px'}" :url="`/v1/components/${labelMarkerRequestUrl}/data`" method="get" :data="[['']]">
       <base-map ref="map" :mapOptions="craneStates.mapOptions" :satellite="true">
         <div v-if="craneStates.currentCompanyTag === 'fireFighting'">
-          <data-loader v-slot="{ results: results }" :url="`/v1/components/0007dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data`" method="get" :data="[['']]" />
           <regions ref="fireFightingRegions" @area-clicked="(geoJSON, area)=>[setState('selectedArea', area), setState('showDetail', true)]" :areas="fireFightingCompany.features" :areaStyle="craneStates.fireFightingAreaStyle" :areaHoverStyle="craneStates.fireFightingHoverStyle" />
         </div>
         <div v-if="craneStates.currentCompanyTag === 'dangerousChemical'">

@@ -34,17 +34,6 @@ module.exports = {
           },
           children: [
             {
-              component: '@byzanteam/vis-components/data-loader',
-              props: {
-                $url: "`/v1/components/0007dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data`",
-                method: 'get',
-                $data: "[['']]",
-              },
-              exports: {
-                results: 'results'
-              }
-            },
-            {
               id: "fireFightingRegions",
               component: '@byzanteam/map-ui/regions',
               props: {
