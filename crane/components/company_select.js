@@ -35,7 +35,7 @@ module.exports = {
             exports: {item: 'item', index: 'key'}
           },
           props: {
-            $value: "item.index",
+            $value: "item.name",
             $label: "item.name"
           },
           children: [
