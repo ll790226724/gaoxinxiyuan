@@ -1,5 +1,6 @@
 const companySelect = require('./company_select')
 const map = require('./map')
+const typeTab = require('./company_type_tab')
 
 module.exports = {
   route: {
@@ -98,5 +99,6 @@ module.exports = {
   components: [
     map,
     companySelect,
+    typeTab,
   ]
 }

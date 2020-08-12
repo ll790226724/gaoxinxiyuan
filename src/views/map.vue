@@ -31,6 +31,20 @@
         </Option>
       </Select>
     </data-loader>
+    <div ref="company-type-tab" :style="{display: 'flex', position: 'absolute', top: '32px', left: '1528px'}">
+      <div @click="()=>[setState('currentCompanyTag', 'fireFighting')]" :style="{height: '48px', width: '180px', fontSize: '18px', lineHeight: '24px'}">
+        <img src="/zhyq/icon/flamethrower-circle.svg" />
+        <span>
+          消防重点企业
+        </span>
+      </div>
+      <div @click="()=>[setState('currentCompanyTag', 'dangerousChemical')]" :style="{height: '48px', width: '180px', fontSize: '18px', lineHeight: '24px'}">
+        <img src="/zhyq/icon/skeleton.svg" />
+        <span>
+          危化品企业
+        </span>
+      </div>
+    </div>
   </div>
 </template>
 
