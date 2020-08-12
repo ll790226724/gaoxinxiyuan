@@ -93,7 +93,7 @@ module.exports = {
               events: {
                 'marker-clicked': {
                   params: ['marker'],
-                  actions: ["setMarkerZindex(marker, 200)", "setState('currentBuilding', marker.target.getExtData().name)", "setState('currentCompanyTag', marker.target.getExtData().tag)",  "setState('showDetail', true)"]
+                  actions: ["setMarkerZindex(marker, 200)", "setState('currentCompany', marker.target.getExtData().name)", "setState('showDetail', true)"]
                 },
                 'marker-mouseover': {
                   params: ["marker"],
@@ -131,7 +131,7 @@ module.exports = {
               events: {
                 'marker-clicked': {
                   params: ['marker'],
-                  actions: ["setMarkerZindex(marker, 200)", "setState('currentBuilding', marker.target.getExtData().name)", "setState('currentCompanyTag', marker.target.getExtData().tag)", "setState('showDetail', true)"]
+                  actions: ["setMarkerZindex(marker, 200)", "setState('currentCompany', marker.target.getExtData().name)", "setState('showDetail', true)"]
                 },
                 'marker-mouseover': {
                   params: ["marker"],

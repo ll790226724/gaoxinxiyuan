@@ -9,10 +9,10 @@
           <regions ref="fireFightingRegions" @area-clicked="(geoJSON, area)=>[setState('selectedArea', area), setState('showDetail', true)]" :areas="dangerousChemicalCompany.features" :areaStyle="craneStates.dangerousChemicalAreaStyle" :areaHoverStyle="craneStates.dangerousChemicalHoverStyle" />
         </div>
         <div v-if="fireFightingMarkerShow">
-          <custom-marker ref="fireFightingBuildingMarker" v-for="(marker, index) in craneStates.companyBuildingData" :key="index + marker.point[0] + marker.point[1] + marker.tag + marker.name" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentBuilding', marker.target.getExtData().name), setState('showDetail', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" :offset="craneStates.leftLabelsConfig.offset" :anchor="craneStates.leftLabelsConfig.options.anchor" :content="`<div style='display: flex; align-items: center;'><img style='height: 10px;' src='https://slp-qiniu-beta.skylarkly.com/Fj3dfxguTdyghUKmWIHSMsVDpBiY'/><div class='label-marker'>${marker.name}</div></div>`" />
+          <custom-marker ref="fireFightingBuildingMarker" v-for="(marker, index) in craneStates.companyBuildingData" :key="index + marker.point[0] + marker.point[1] + marker.tag + marker.name" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentCompany', marker.target.getExtData().name), setState('showDetail', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" :offset="craneStates.leftLabelsConfig.offset" :anchor="craneStates.leftLabelsConfig.options.anchor" :content="`<div style='display: flex; align-items: center;'><img style='height: 10px;' src='https://slp-qiniu-beta.skylarkly.com/Fj3dfxguTdyghUKmWIHSMsVDpBiY'/><div class='label-marker'>${marker.name}</div></div>`" />
         </div>
         <div v-if="dangerousChemicalMarkerShow">
-          <custom-marker ref="dangerousChemicalBuildingMarker" v-for="(marker, index) in craneStates.companyBuildingData" :key="marker.point[0] + marker.point[1] + marker.tag + marker.name + index" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentBuilding', marker.target.getExtData().name), setState('showDetail', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" :offset="craneStates.leftLabelsConfig.offset" :anchor="craneStates.leftLabelsConfig.options.anchor" :content="`<div style='display: flex; align-items: center;'><img style='height: 10px;' src='https://slp-qiniu-beta.skylarkly.com/Fj3dfxguTdyghUKmWIHSMsVDpBiY'/><div class='label-marker'>${marker.name}</div></div>`" />
+          <custom-marker ref="dangerousChemicalBuildingMarker" v-for="(marker, index) in craneStates.companyBuildingData" :key="marker.point[0] + marker.point[1] + marker.tag + marker.name + index" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentCompany', marker.target.getExtData().name), setState('showDetail', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" :offset="craneStates.leftLabelsConfig.offset" :anchor="craneStates.leftLabelsConfig.options.anchor" :content="`<div style='display: flex; align-items: center;'><img style='height: 10px;' src='https://slp-qiniu-beta.skylarkly.com/Fj3dfxguTdyghUKmWIHSMsVDpBiY'/><div class='label-marker'>${marker.name}</div></div>`" />
         </div>
       </base-map>
     </data-loader>
@@ -81,8 +81,20 @@ export const map = {
         rightLabelsConfig: {offset: [-12, 4], options: {anchor: 'middle-left'}},
         mapOptions: {zoom: 16, zooms: [16, 18], center: [103.902752,30.768677]},
         companyBuildingData: [],
+        selectAreaOptions: [],
+        currentCompany: ''
       },
     }
+  },
+
+  watch: {
+    'craneStates.selectedArea' (value) {
+      const [geojson] = value.toGeoJSON()
+      this.craneStates.currentCompany = geojson.properties.name
+      console.log(this.craneStates.currentCompany)
+      console.log(geojson)
+      this.resizeMap(16, geojson.properties.coordinate)
+    },
   },
 
   computed: {
@@ -178,13 +190,13 @@ export const map = {
     },
 
     markerMouseoutFunc(marker) {
-      if(this.craneStates.currentBuilding !== marker.target.getExtData().name){
+      if(this.craneStates.currentCompany !== marker.target.getExtData().name){
         this.setMarkerZindex(marker, 100)
       }
     },
 
     markerMouseoverFunc(marker) {
-      if(this.craneStates.currentBuilding !== marker.target.getExtData().name){
+      if(this.craneStates.currentCompany !== marker.target.getExtData().name){
         this.setMarkerZindex(marker, 300)
       }
     },
@@ -193,8 +205,8 @@ export const map = {
       marker.target.setzIndex(zindex)
     },
     getName(geoJSON, area) {
-      console.log(geoJSON)
-      console.log(area)
+      // console.log(geoJSON)
+      // console.log(area)
     }
   },
 }

@@ -85,6 +85,14 @@ module.exports = {
     {
       id: 'companyBuildingData',
       value: []
+    },
+    {
+      id: 'selectAreaOptions',
+      value: []
+    },
+    {
+      id: 'currentCompany',
+      value: ''
     }
   ],
   components: [
