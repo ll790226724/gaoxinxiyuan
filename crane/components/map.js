@@ -56,7 +56,7 @@ module.exports = {
                 'area-clicked': {
                   params: ["geoJSON", "area"],
                   // 1. 被选中的区域 2. 为了tab切换设置的Tag 3. 选中显示公司详情
-                  actions: ["setState('selectedArea', area)", "setState('currentCompanyTag', 'fireFighting')",  "setState('showDetail', true)"],
+                  actions: ["setState('selectedArea', area)",  "setState('showDetail', true)"],
                 }
               }
             },
@@ -80,7 +80,7 @@ module.exports = {
               events: {
                 'area-clicked': {
                   params: ["geoJSON", "area"],
-                  actions: ["setState('selectedArea', area)", "setState('currentCompanyTag', 'dangerousChemical')",  "setState('showDetail', true)"],
+                  actions: ["setState('selectedArea', area)", "setState('showDetail', true)"],
                 }
               }
             },
