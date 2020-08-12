@@ -14,13 +14,6 @@ module.exports = {
         type: 'normal',
         path: 'dist/map-ui.css',
       },
-      '@byzanteam/vis-components': {
-        version: '../vis-components',
-        style: {
-          type: 'normal',
-          path: 'dist/index.css',
-        },
-      },
     },
   },
   pages: [
