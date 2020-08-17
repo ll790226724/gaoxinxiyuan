@@ -10,8 +10,8 @@ module.exports = {
   children: [
     {
       component: 'div',
-      $class: 'fire-selected',
       props: {
+        $class: 'fire-selected',
         $style: {
           height: '48px',
           width: '180px',
@@ -39,8 +39,8 @@ module.exports = {
     },
     {
       component: 'div',
-      $class: 'dangerous-selected',
       props: {
+        $class: 'dangerous-selected',
         $style: {
           height: '48px',
           width: '180px',

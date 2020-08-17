@@ -7,15 +7,6 @@ module.exports = {
       width: "100%",
       height: "100%"
     },
-    $url: "`/v1/components/${labelMarkerRequestUrl}/data`",
-    method: 'get',
-    $data: "[['']]",
-  },
-  events: {
-    requestDone: {
-      params: ['param'],
-      actions: ["setState('companyBuildingData', param.results ? param.results.map(item => ({name: item[0], point: [item[1][1], item[1][0]], labelMarker: true, })) : [])"],
-    },
   },
   children: [
     {
@@ -26,7 +17,7 @@ module.exports = {
         $satellite: true,
       },
       children: [
-        // 显示消防重点的企业，currentPartyTag应该替换成currentCompanyTag, dangerousChemical(tag名)替换成dangerousChemical
+        // 显示消防重点的企业regions
         {
           component: 'div',
           props: {
@@ -51,7 +42,7 @@ module.exports = {
             },
           ]
         },
-        // 显示危化品企业，currentPartyTag应该替换成currentCompanyTag, fireFighting(tag名)替换成fireFighting
+        // 显示危化品企业regions
         {
           component: 'div',
           props: {
@@ -59,7 +50,7 @@ module.exports = {
           },
           children: [
             {
-              id: "fireFightingRegions",
+              id: "dangerousChemicalRegions",
               component: '@byzanteam/map-ui/regions',
               props: {
                 $areas: "dangerousChemicalCompany.features",
@@ -77,16 +68,25 @@ module.exports = {
         },
         // 重点消防建筑labelMarker点
         {
-          component: 'div',
+          component: '@byzanteam/vis-components/data-loader',
           props: {
             'v-if': 'fireFightingMarkerShow',
+            $url: "`/v1/components/0007dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data`",
+            method: 'get',
+            $data: "[['']]",
+          },
+          events: {
+            requestDone: {
+              params: ['param'],
+              actions: ["setState('fireFightingCompanyBuildingData', param.results ? param.results.map(item => ({name: item[0], point: [item[1][1], item[1][0]], labelMarker: true, })) : [])"],
+            },
           },
           children: [
             {
               component: '@byzanteam/map-ui/custom-marker',
               id: 'fireFightingBuildingMarker',
               vfor: {
-                data: "craneStates.companyBuildingData",
+                data: "craneStates.fireFightingCompanyBuildingData",
                 exports: {item: 'marker', index: 'index'},
                 key: 'index + marker.point[0] + marker.point[1] + marker.tag + marker.name'
               },
@@ -115,16 +115,25 @@ module.exports = {
         },
         // 危化品建筑名marker点
         {
-          component: 'div',
+          component: '@byzanteam/vis-components/data-loader',
           props: {
             'v-if': 'dangerousChemicalMarkerShow',
+            $url: "`/v1/components/0107dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data`",
+            method: 'get',
+            $data: "[['']]",
+          },
+          events: {
+            requestDone: {
+              params: ['param'],
+              actions: ["setState('dangerousChemicalCompanyBuildingData', param.results ? param.results.map(item => ({name: item[0], point: [item[1][1], item[1][0]], labelMarker: true, })) : [])"],
+            },
           },
           children: [
             {
               component: '@byzanteam/map-ui/custom-marker',
               id: 'dangerousChemicalBuildingMarker',
               vfor: {
-                data: "craneStates.companyBuildingData",
+                data: "craneStates.dangerousChemicalCompanyBuildingData",
                 exports: {item: 'marker', index: 'index'},
                 key: 'marker.point[0] + marker.point[1] + marker.tag + marker.name + index'
               },

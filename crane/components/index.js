@@ -84,7 +84,11 @@ module.exports = {
       value: "{zoom: 16, zooms: [16, 18], center: [103.902752,30.768677]}"
     },
     {
-      id: 'companyBuildingData',
+      id: 'fireFightingCompanyBuildingData',
+      value: ''
+    },
+    {
+      id: 'dangerousChemicalCompanyBuildingData',
       value: []
     },
     {
