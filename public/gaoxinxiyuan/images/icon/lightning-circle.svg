@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon/lightning-circle</title>
+    <defs>
+        <path d="M12,0 C5.37600278,0 0,5.37600278 0,12 C0,18.6239972 5.37600278,24 12,24 C18.6239972,24 24,18.6239972 24,12 C24,5.37600278 18.6239972,0 12,0 Z M19,10.9482837 L10.2830116,20 L12.1320739,14.0517163 L5,14.0517163 L13.716961,5 L11.8678987,10.9482837 L19,10.9482837 Z" id="path-1"></path>
+    </defs>
+    <g id="icon/lightning-circle" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="形状" fill="#fa6400" fill-rule="nonzero" xlink:href="#path-1"></use>
+    </g>
+</svg>

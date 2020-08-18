@@ -6,7 +6,12 @@ import plugins from './plugins/index'
 
 import '@byzanteam/map-ui/dist/map-ui.css'
 import 'view-design/dist/styles/iview.css'
+import Viewer from 'v-viewer'
+import 'viewerjs/dist/viewer.css'
+
 import './styles/reset.css'
+
+Vue.use(Viewer)
 
 plugins.install()
 
