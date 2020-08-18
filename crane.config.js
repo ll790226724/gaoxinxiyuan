@@ -1,4 +1,5 @@
 // const map = require('./crane/components/index')
+const enterpriseDetail = require('./crane/enterprise-detail/index')
 
 module.exports = {
   name: 'gaoxinxiyuan',
@@ -17,5 +18,6 @@ module.exports = {
   },
   pages: [
     // map
+    enterpriseDetail
   ]
 }
