@@ -14,7 +14,7 @@ module.exports = {
       overflow: 'hidden',
     },
     $params: {
-      $name: 'craneStates.enterpriseName'
+      $name: 'craneStates.currentCompany'
     },
   },
   children: [

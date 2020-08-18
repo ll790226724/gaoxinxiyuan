@@ -12,7 +12,7 @@ module.exports = {
             value: true,
         },
         {
-            id: 'enterpriseName',
+            id: 'currentCompany',
             value: '成都中光电科技有限公司',
         },
         {

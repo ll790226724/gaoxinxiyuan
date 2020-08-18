@@ -36,7 +36,7 @@ module.exports = {
                 'area-clicked': {
                   params: ["geoJSON", "area"],
                   // 1. 被选中的区域 2. 为了tab切换设置的Tag 3. 选中显示公司详情
-                  actions: ["setState('selectedArea', area)",  "setState('showDetail', true)"],
+                  actions: ["setState('selectedArea', area)",  "setState('showState', true)"],
                 }
               }
             },
@@ -60,7 +60,7 @@ module.exports = {
               events: {
                 'area-clicked': {
                   params: ["geoJSON", "area"],
-                  actions: ["setState('selectedArea', area)", "setState('showDetail', true)"],
+                  actions: ["setState('selectedArea', area)", "setState('showState', true)"],
                 }
               }
             },
@@ -93,7 +93,7 @@ module.exports = {
               events: {
                 'marker-clicked': {
                   params: ['marker'],
-                  actions: ["setMarkerZindex(marker, 200)", "setState('currentCompany', marker.target.getExtData().name)", "setState('showDetail', true)"]
+                  actions: ["setMarkerZindex(marker, 200)", "setState('currentCompany', marker.target.getExtData().name)", "setState('showState', true)"]
                 },
                 'marker-mouseover': {
                   params: ["marker"],
@@ -140,7 +140,7 @@ module.exports = {
               events: {
                 'marker-clicked': {
                   params: ['marker'],
-                  actions: ["setMarkerZindex(marker, 200)", "setState('currentCompany', marker.target.getExtData().name)", "setState('showDetail', true)"]
+                  actions: ["setMarkerZindex(marker, 200)", "setState('currentCompany', marker.target.getExtData().name)", "setState('showState', true)"]
                 },
                 'marker-mouseover': {
                   params: ["marker"],
