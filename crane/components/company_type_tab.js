@@ -21,7 +21,7 @@ module.exports = {
       },
       events: {
         'click': {
-          actions: ["setState('currentCompanyTag', 'fireFighting')"]
+          actions: ["setState('currentCompanyTag', 'fireFighting')", "setState('showState', false)"]
         }
       },
       children: [
@@ -50,7 +50,7 @@ module.exports = {
       },
       events: {
         'click': {
-          actions: ["setState('currentCompanyTag', 'dangerousChemical')"]
+          actions: ["setState('currentCompanyTag', 'dangerousChemical')", "setState('showState', false)"]
         }
       },
       children: [
