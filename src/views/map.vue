@@ -145,7 +145,7 @@ export const map = {
         labelMarkerInitialed: true,
         leftLabelsConfig: {offset: [-2, 4], options: {anchor: 'middle-left'}},
         rightLabelsConfig: {offset: [-12, 4], options: {anchor: 'middle-left'}},
-        mapOptions: {zoom: 16, zooms: [16, 18], center: [103.902752,30.768677]},
+        mapOptions: {zoom: 14, zooms: [14, 17], center: [103.902752,30.768677]},
         fireFightingCompanyBuildingData: [],
         dangerousChemicalCompanyBuildingData: [],
         selectAreaOptions: [],
@@ -181,40 +181,14 @@ export const map = {
         }
       }
     },
-    'craneStates.currentCompanyTag'(value) {
-      this.$nextTick(() => {
-        console.log('里', this.$refs)
-      })
+    'craneStates.currentCompanyTag'() {
       const { map } = this.$refs.map
       // 隐藏region
       const overlays = map.getAllOverlays()
       overlays.forEach(overlay => {
         overlay.hide()
       })
-
-      if(value === 'fireFighting') {
-        this.$nextTick(() => {
-          // const {
-          //   communityRegions = [],
-          //   communityBuildingMarker = [],
-          // } = this.$refs
-          // console.log(this.$refs)
-          // communityRegions.geoJSONAreas.forEach(region => {
-          //   region.shape.show();
-          // })
-          // communityPartyFlagMarker.concat(communityPartylabelMarker, communityBuildingMarker).forEach(marker => {
-          //   marker.instance.show()
-          // })
-        })
-      }
     },
-    'labelMarkerRequestUrl'(value) {
-      console.log(value)
-      console.log('外', this.$refs)
-      this.$nextTick(() => {
-        console.log('里', this.$refs)
-      })
-    }
   },
 
   computed: {
@@ -246,46 +220,8 @@ export const map = {
   created() {},
 
   methods: {
-    mapResizeFunc () {
-      const { map } = this.$refs.map
-      const zoom = map.getZoom()
-      const markers = map.getAllOverlays('marker')
-      if(this.mapZoom === zoom) return
-      this.mapZoom = zoom
-      const {
-        partyFlagMarker,
-        labelMarker
-      } = this.$refs
-
-      if (zoom >=16) {
-        this.hideMarkers(markers, this.craneStates.tabCurrent)
-      } else {
-        markers.forEach(marker => {
-          const exdata = marker.getExtData()
-          if(!exdata.labelMarker) {
-            marker.hide()
-          }
-        })
-        labelMarker.concat(partyFlagMarker).forEach(marker => {
-          marker.instance.show()
-        })
-      }
-    },
-
-    hideMarkers(markers, tab) {
-      markers.forEach(marker => {
-        marker.hide()
-      })
-    },
-
     resizeMap(zoom, center) {
       this.$refs.map.map.setZoomAndCenter(zoom, center)
-    },
-
-    markerRenderFunc(marker) {
-      if (this.$refs.map.map.getZoom() >=16) {
-        this.$refs.map.map.remove(marker);
-      }
     },
 
     markerMouseoutFunc(marker) {

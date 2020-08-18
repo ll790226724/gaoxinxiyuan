@@ -68,7 +68,7 @@ module.exports = {
     },
     {
       id: 'mapOptions',
-      value: "{zoom: 16, zooms: [16, 18], center: [103.902752,30.768677]}"
+      value: "{zoom: 14, zooms: [14, 17], center: [103.902752,30.768677]}"
     },
     {
       id: 'fireFightingCompanyBuildingData',
