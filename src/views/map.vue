@@ -19,14 +19,21 @@
     <data-loader ref="company_select" @requestDone="(params)=>[setState('selectAreaOptions', params.results ? params.results.map(item => ({name: item[0], address: item[1]})) : [])]" :url="`/v1/components/0017dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data`" method="get" :data="[['']]" :style="{position: 'absolute', top: '32px', left: '32px'}">
       <Select class="company-select" :filterable="true" :clearable="true" prefix="ios-search" :style="{width: '400px', height: '48px'}" v-model="craneStates.currentCompany">
         <Option v-for="(item, key) in craneStates.selectAreaOptions" :key="key" :value="item.name" :label="item.name">
-          <div class="company-name">
-            {{item.name}}
-          </div>
-          <div class="company-address">
-            <img src="/zhyq/icon/map-marker.svg" />
-            <span>
-              {{item.address}}
-            </span>
+          <div ref="option-box" :style="{display: 'flex'}">
+            <div ref="index-column" class="index-column">
+              {{(key + 1) + '.'}}
+            </div>
+            <div ref="name-address-box" :style="{display: 'flex', flexFlow: 'column', paddingTop: '16px', paddingRight: '12px', paddingBottom: '16px'}">
+              <div ref="company-name" class="company-name">
+                {{item.name}}
+              </div>
+              <div ref="company-address" class="company-address">
+                <img ref="company-address-icon" class="company-address-icon" src="/zhyq/icon/map-marker.svg" />
+                <span>
+                  {{item.address}}
+                </span>
+              </div>
+            </div>
           </div>
         </Option>
       </Select>
@@ -256,8 +263,4 @@ export const map = {
 export default map
 </script>
 <style lang="scss">
-.company-name {
-
-}
-.company-address{}
 </style>

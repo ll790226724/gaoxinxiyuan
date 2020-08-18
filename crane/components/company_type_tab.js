@@ -11,7 +11,7 @@ module.exports = {
     {
       component: 'div',
       props: {
-        $class: 'fire-selected',
+        $class: 'fireSelected',
         $style: {
           height: '48px',
           width: '180px',
@@ -40,7 +40,7 @@ module.exports = {
     {
       component: 'div',
       props: {
-        $class: 'dangerous-selected',
+        $class: 'dangerousSelected',
         $style: {
           height: '48px',
           width: '180px',

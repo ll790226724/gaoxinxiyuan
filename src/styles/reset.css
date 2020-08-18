@@ -30,3 +30,95 @@
   justify-content: space-evenly;
   align-items: center;
 }
+
+/*下拉选择器*/
+.ivu-select-visible .ivu-select-selection {
+  border: none;
+  box-shadow: none;
+}
+
+.ivu-select-selection {
+  background-color: #232B39;
+  border: 1px solid #232B39;
+}
+
+.ivu-select-single .ivu-select-selection {
+  height: inherit;
+}
+
+.ivu-select-input {
+  font-size: 18px;
+  color: #fff;
+  padding: 0 24px 0 12px;
+}
+
+.ivu-select-input::placeholder {
+  font-size: 18px;
+  color: rgba(255, 255, 255, .4)
+}
+
+.ivu-select-selection-focused, .ivu-select-selection:hover {
+  border: none;
+}
+
+.ivu-icon-ios-search:before {
+  color: rgba(255, 255, 255, .4)
+}
+
+
+.ivu-select-head-flex {
+  height: inherit;
+}
+
+.ivu-select-dropdown {
+  top: 46px!important;
+  background-color: #232B39;
+  max-height: 970px;
+}
+
+.ivu-select-item {
+  height: 80px;
+}
+
+.ivu-select-item-selected, .ivu-select-item-selected:hover {
+  color: #fa6400;
+}
+
+.ivu-select-item-focus {
+  background: rgba(255, 255, 255, .05);
+}
+
+.ivu-select-item:hover {
+  background: rgba(255, 255, 255, .05);
+}
+
+.company-name {
+  font-size: 18px;
+  color: #fff;
+  font-weight: 400;
+  line-height: 24px;
+  padding-bottom: 4px;
+}
+
+.index-column {
+  font-size: 18px;
+  color: #ffffff;
+  line-height: 18px;
+  padding: 16px 12px 12px 0;
+}
+
+.name-address-box:hover > .company-name {
+  color: #fa6400;
+}
+
+.company-address {
+  color: rgba(255, 255, 255, .5);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.company-address-icon {
+  height: 12px;
+  width: 12px;
+}

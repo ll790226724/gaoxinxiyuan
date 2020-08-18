@@ -40,30 +40,68 @@ module.exports = {
           },
           children: [
             {
+              id: 'option-box',
               component: 'div',
               props: {
-                class: 'company-name',
-              },
-              content: '{{item.name}}'
-            },
-            {
-              component: 'div',
-              props: {
-                class: 'company-address'
+                $style: {
+                  display: 'flex',
+                }
               },
               children: [
                 {
-                  component: 'img',
+                  id: 'index-column',
+                  component: 'div',
                   props: {
-                    src: '/zhyq/icon/map-marker.svg'
-                  }
+                    class: 'index-column',
+                  },
+                  content: "{{(key + 1) + '.'}}"
                 },
                 {
-                  component: 'span',
-                  content: '{{item.address}}'
+                  id: 'name-address-box',
+                  component: 'div',
+                  props: {
+                    $style: {
+                      display: 'flex',
+                      flexFlow: 'column',
+                      paddingTop: '16px',
+                      paddingRight: '12px',
+                      paddingBottom: '16px',
+                    }
+                  },
+                  children: [
+                    {
+                      id: 'company-name',
+                      component: 'div',
+                      props: {
+                        class: 'company-name',
+                      },
+                      content: '{{item.name}}'
+                    },
+                    {
+                      id: 'company-address',
+                      component: 'div',
+                      props: {
+                        class: 'company-address'
+                      },
+                      children: [
+                        {
+                          id: 'company-address-icon',
+                          component: 'img',
+                          props: {
+                            class: 'company-address-icon',
+                            src: '/zhyq/icon/map-marker.svg'
+                          }
+                        },
+                        {
+                          component: 'span',
+                          content: '{{item.address}}'
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
-            }
+            },
           ]
         }
       ]
