@@ -16,7 +16,7 @@
         </data-loader>
       </base-map>
     </data-loader>
-    <data-loader ref="company_select" @requestDone="(params)=>[setState('selectAreaOptions', params.results ? params.results.map(item => ({name: item[0], address: item[1]})) : [])]" :url="`/v1/components/0017dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data`" method="get" :data="[['']]" :style="{position: 'absolute', top: '32px', left: '32px'}">
+    <data-loader ref="company_select" @requestDone="(params)=>[setState('selectAreaOptions', params.results ? params.results.map(item => ({name: item[0], address: item[1]})) : [])]" :url="`/v1/components/${companySelectData}/data`" method="get" :data="[['']]" :style="{position: 'absolute', top: '32px', left: '32px'}">
       <Select class="company-select" :filterable="true" :clearable="true" prefix="ios-search" :style="{width: '400px', height: '48px'}" v-model="craneStates.currentCompany">
         <Option v-for="(item, key) in craneStates.selectAreaOptions" :key="key" :value="item.name" :label="item.name">
           <div ref="option-box" :style="{display: 'flex'}">
@@ -213,6 +213,14 @@ export const map = {
     reqUrl(id){
       return function(id){
         return `/v1/components/${id}/data`
+      }
+    },
+    companySelectData() {
+      if(this.craneStates.currentCompanyTag === 'fireFighting') {
+        return '0017dd5e-d3ff-4c5f-9ab4-44d75afb40a1'
+      }
+      if(this.craneStates.currentCompanyTag === 'dangerousChemical') {
+        return '0117dd5e-d3ff-4c5f-9ab4-44d75afb40a1'
       }
     }
   },

@@ -3,7 +3,7 @@ module.exports = {
   component: '@byzanteam/vis-components/data-loader',
   position: [32, 32],
   props: {
-    $url: "`/v1/components/0017dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data`",
+    $url: "`/v1/components/${companySelectData}/data`",
     method: 'get',
     $data: "[['']]",
   },
