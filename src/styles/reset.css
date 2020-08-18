@@ -14,3 +14,19 @@
   color: #fff;
 }
 
+.tab--default {
+  background-color: #232B39;
+  font-size: 18px;
+  color: #fff;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.tab--active {
+  background-color: #fa6400;
+  font-size: 18px;
+  color: #fff;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}

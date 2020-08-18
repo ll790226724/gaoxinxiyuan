@@ -114,19 +114,30 @@ export const map = {
     'craneStates.selectedArea' (value) {
       const [geojson] = value.toGeoJSON()
       this.craneStates.currentCompany = geojson.properties.name
-      console.log(this.craneStates.currentCompany)
-      console.log(geojson)
       this.resizeMap(16, geojson.properties.coordinate)
     },
     'craneStates.currentCompany' (row) {
-      let point = _.find(this.craneStates.companyBuildingData, item => (item.name === row))
-      if(!point) {
-        this.resizeMap(16, this.craneStates.mapOptions.center)
-      } else {
-        this.resizeMap(16, point.point)
+      if (this.craneStates.currentCompanyTag === 'dangerousChemical') {
+        let point = _.find(this.craneStates.dangerousChemicalCompanyBuildingData, item => (item.name === row))
+        if(!point) {
+          this.resizeMap(16, this.craneStates.mapOptions.center)
+        } else {
+          this.resizeMap(16, point.point)
+        }
+      }
+      if (this.craneStates.currentCompanyTag === 'fireFighting') {
+        let point = _.find(this.craneStates.fireFightingCompanyBuildingData, item => (item.name === row))
+        if(!point) {
+          this.resizeMap(16, this.craneStates.mapOptions.center)
+        } else {
+          this.resizeMap(16, point.point)
+        }
       }
     },
     'craneStates.currentCompanyTag'(value) {
+      this.$nextTick(() => {
+        console.log('里', this.$refs)
+      })
       const { map } = this.$refs.map
       // 隐藏region
       const overlays = map.getAllOverlays()
@@ -137,8 +148,6 @@ export const map = {
       if(value === 'fireFighting') {
         this.$nextTick(() => {
           // const {
-          //   communityPartylabelMarker = [],
-          //   communityPartyFlagMarker = [],
           //   communityRegions = [],
           //   communityBuildingMarker = [],
           // } = this.$refs
@@ -163,20 +172,20 @@ export const map = {
 
   computed: {
     fireFightingMarkerShow() {
-      return this.craneStates.currentCompanyTag !== 'fireFighting'
+      return this.craneStates.currentCompanyTag === 'fireFighting'
     },
     dangerousChemicalMarkerShow() {
-      return this.craneStates.currentCompanyTag !== 'dangerousChemical'
+      return this.craneStates.currentCompanyTag === 'dangerousChemical'
     },
     fireSelected() {
       if(this.craneStates.currentCompanyTag === 'fireFighting') {
-        return 'tab-active'
+        return 'tab--active'
       }
       return 'tab--default'
     },
     dangerousSelected() {
       if(this.craneStates.currentCompanyTag === 'dangerousChemical') {
-        return 'tab-active'
+        return 'tab--active'
       }
       return 'tab--default'
     }
