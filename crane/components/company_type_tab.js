@@ -28,7 +28,7 @@ module.exports = {
         {
           component: 'img',
           props: {
-            src: '/zhyq/icon/flamethrower-circle.svg'
+            src: '/zhyq/icon/flamethrower.svg'
           }
         },
         {
