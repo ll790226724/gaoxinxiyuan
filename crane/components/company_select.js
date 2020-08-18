@@ -20,7 +20,6 @@ module.exports = {
         class: 'company-select',
         $filterable: true,
         $clearable: true,
-        prefix: 'ios-search',
         $style: {
           width: '400px',
           height: '48px'
@@ -28,6 +27,18 @@ module.exports = {
         'v-model': 'craneStates.currentCompany'
       },
       children: [
+        {
+          id: 'search-icon',
+          component: 'img',
+          props: {
+            $style: {
+              height: '20px',
+              width: '20px',
+            },
+            src: '/zhyq/icon/search.svg',
+            slot: 'prefix',
+          }
+        },
         {
           component: 'view-design/Option',
           vfor: {
