@@ -54,8 +54,8 @@
       </div>
     </div>
     <div ref="enterprise-detail" v-show="craneStates.showState">
-      <img ref="background" src="/gaoxinxiyuan/images/dialo-bg.png" :style="{width: 'calc(100% - 64px)', height: 'auto', position: 'absolute', top: '84px', left: '32px'}" />
-      <img @click="()=>[setState('showState', !craneStates.showState)]" src="/gaoxinxiyuan/images/icon/times-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '48px'}" />
+      <img ref="background" src="/zhyq/images/dialo-bg.png" :style="{width: 'calc(100% - 64px)', height: 'auto', position: 'absolute', top: '84px', left: '32px'}" />
+      <img @click="()=>[setState('showState', !craneStates.showState)]" src="/zhyq/icon/times-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '48px'}" />
       <div :style="{width: '524px', height: '28px', color: '#fff', fontSize: '28px', lineHeight: '28px', fontWeight: '600', position: 'absolute', top: '130px', left: '88px'}" v-text="craneStates.currentCompany" />
       <data-loader ref="enterpriseData" v-slot="{ results: results }" url="/v1/components/0027dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data" :style="{width: '618px', height: '848px', border: '1px solid rgba(255, 255, 255, .1)', overflow: 'hidden', position: 'absolute', top: '204px', left: '32px'}" :params="{name: craneStates.currentCompany}">
         <ul ref="enterpriseTable" :style="{height: '100%', overflowY: 'scroll'}" class="enterprise-table">
@@ -65,12 +65,12 @@
           </li>
         </ul>
       </data-loader>
-      <img src="/gaoxinxiyuan/images/icon/lightning-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '692px'}" />
+      <img src="/zhyq/icon/lightning-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '692px'}" />
       <div :style="{width: '498px', height: '26px', color: '#fff', fontSize: '26px', lineHeight: '26px', fontWeight: '400', position: 'absolute', top: '131px', left: '732px'}">
         应急救援情况（含应急方案图）
       </div>
-      <img src="/gaoxinxiyuan/images/icon/user-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '913px', left: '712px'}" />
-      <img src="/gaoxinxiyuan/images/line.png" :style="{width: '19px', height: '120px', position: 'absolute', top: '865px', left: '752px'}" />
+      <img src="/zhyq/icon/user-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '913px', left: '712px'}" />
+      <img src="/zhyq/images/line.png" :style="{width: '19px', height: '120px', position: 'absolute', top: '865px', left: '752px'}" />
       <div :style="{position: 'absolute', top: '850px', left: '787px'}">
         <div v-for="(item, key) in craneStates.safetyOfficerData" :key="key" :style="{marginBottom: '32px'}">
           <data-loader v-slot="{ results: results }" :url="reqUrl(item.id)" :params="{name: craneStates.currentCompany}" :style="{display: 'flex', alignItems: 'center', fontSize: '20px', fontWeight: '400'}">
@@ -84,7 +84,7 @@
       <data-loader v-slot="{ results: results }" url="/v1/components/0137dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data" :params="{name: craneStates.currentCompany}" :style="{width: '466px', height: '596px', overflowY: 'scroll', position: 'absolute', top: '204px', left: '732px'}">
         <image-view :imgs="results && results[0]" />
       </data-loader>
-      <img src="/gaoxinxiyuan/images/icon/flamethrower-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '1310px'}" />
+      <img src="/zhyq/icon/flamethrower-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '1310px'}" />
       <div :style="{width: '498px', height: '26px', color: '#fff', fontSize: '26px', lineHeight: '26px', fontWeight: '400', position: 'absolute', top: '131px', left: '1350px'}">
         危化品平面位置摆放图（含应急出口）
       </div>
@@ -135,6 +135,7 @@ export const map = {
       fireFightingCompany: gcoord.transform(fireFightingGeoJson, gcoord.WGS84, gcoord.GCJ02),
       dangerousChemicalCompany: gcoord.transform(dangerousChemicalGeoJson, gcoord.WGS84, gcoord.GCJ02),
       craneStates: {
+        showState: false,
         dangerousChemicalAreaStyle: {strokeColor: '#Fa6400', fillColor: '#Fa64004D', strokeStyle: 'dashed', fillOpacity: 0.2, strokeWeight: 3},
         dangerousChemicalHoverStyle: {strokeColor: '#Fa6400', fillColor: '#Fa640066', strokeStyle: 'dashed', fillOpacity: 0.2, strokeWeight: 3},
         fireFightingAreaStyle: {strokeColor: '#Fa6400', fillColor: '#Fa64004D', strokeStyle: 'dashed', fillOpacity: 0.2, strokeWeight: 3},
@@ -152,7 +153,7 @@ export const map = {
         selectAreaOptions: [],
         currentCompany: '',
         showState: false,
-        tableHeader: [{field: 'company_name', value: '企业名称'}, {field: 'registered_address', value: '注册地址'}, {field: 'actual_address', value: '实际地址'}, {field: 'industry', value: '行业领域'}, {field: 'main_business', value: '主营业务'}, {field: 'header_name', value: '单位负责人姓名'}, {field: 'header_phone', value: '单位负责人电话'}, {field: 'area', value: '场地总面积'}, {field: 'number', value: '从业人数（人）'}, {field: 'security_name', value: '安全负责人姓名'}, {field: 'sucurity_phone', value: '安全负责人电话'}],
+        tableHeader: [{field: 'company_name', value: '企业名称'}, {field: 'registered_address', value: '注册地址'}, {field: 'actual_address', value: '实际地址'}, {field: 'industry', value: '行业领域'}, {field: 'main_business', value: '主营业务'}, {field: 'header_name', value: '单位负责人姓名'}, {field: 'header_phone', value: '单位负责人电话'}, {field: 'area', value: '场地总面积'}, {field: 'number', value: '从业人数（人）'}, {field: 'security_name', value: '安全负责人姓名'}, {field: 'sucurity_phone', value: '安全负责人电话'}, {field: 'legal_name', value: '法定代表人姓名'}, {field: 'legal_phone', value: '法定代表人电话'}, {field: 'commercial_building', value: '是否位于商务商业楼宇'}, {field: 'fuel_gas', value: '是否涉及使用燃气'}, {field: 'gauge', value: '是否为规上企业'}, {field: 'hazardous_chemicals', value: '是否涉及危险化学品'}, {field: 'enterprise_classification', value: '危化品企业分类'}, {field: 'species', value: '危化品种类'}],
         safetyOfficerData: [{id: '0047dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全总负责人'}, {id: '0057dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全第一负责人'}, {id: '0067dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全第二负责人'}],
       },
     }

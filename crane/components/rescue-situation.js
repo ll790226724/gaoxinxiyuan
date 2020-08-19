@@ -4,7 +4,7 @@ module.exports = [
         component: 'img',
         position: [692, 132],
         props: {
-            src: '/gaoxinxiyuan/images/icon/lightning-circle.svg',
+            src: '/zhyq/icon/lightning-circle.svg',
             $style: {
                 width: '24px',
                 height: '24px',
