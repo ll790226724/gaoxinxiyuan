@@ -4,7 +4,7 @@ module.exports = [
         component: 'img',
         position: [48, 132],
         props: {
-            src: '/gaoxinxiyuan/images/icon/times-circle.svg',
+            src: '/zhyq/icon/times-circle.svg',
             $style: {
                 width: '24px',
                 height: '24px',

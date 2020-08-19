@@ -3,7 +3,7 @@ module.exports = [
         component: 'img',
         position: [1310, 132],
         props: {
-            src: '/gaoxinxiyuan/images/icon/flamethrower-circle.svg',
+            src: '/zhyq/icon/flamethrower-circle.svg',
             $style: {
                 width: '24px',
                 height: '24px',

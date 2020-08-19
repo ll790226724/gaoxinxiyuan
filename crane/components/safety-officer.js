@@ -3,7 +3,7 @@ module.exports = [
         component: 'img',
         position: [712, 913],
         props: {
-            src: '/gaoxinxiyuan/images/icon/user-circle.svg',
+            src: '/zhyq/icon/user-circle.svg',
             $style: {
                 width: '24px',
                 height: '24px',
@@ -14,7 +14,7 @@ module.exports = [
         component: 'img',
         position: [752, 865],
         props: {
-            src: '/gaoxinxiyuan/images/line.png',
+            src: '/zhyq/images/line.png',
             $style: {
                 width: '19px',
                 height: '120px',

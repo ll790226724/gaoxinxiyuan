@@ -140,7 +140,39 @@ module.exports = {
         {
           "field": "sucurity_phone",
           "value": "安全负责人电话",
-        }
+        },
+        {
+          "field": "legal_name",
+          "value": "法定代表人姓名",
+        },
+        {
+          "field": "legal_phone",
+          "value": "法定代表人电话",
+        },
+        {
+          "field": "commercial_building",
+          "value": "是否位于商务商业楼宇",
+        },
+        {
+          "field": "fuel_gas",
+          "value": "是否涉及使用燃气",
+        },
+        {
+          "field": "gauge",
+          "value": "是否为规上企业",
+        },
+        {
+          "field": "hazardous_chemicals",
+          "value": "是否涉及危险化学品",
+        },
+        {
+          "field": "enterprise_classification",
+          "value": "危化品企业分类",
+        },
+        {
+          "field": "species",
+          "value": "危化品种类",
+        },
       ]
     },
     {
@@ -177,7 +209,7 @@ module.exports = {
           component: 'img',
           position: [32, 84],
           props: {
-            src: '/gaoxinxiyuan/images/dialo-bg.png',
+            src: '/zhyq/images/dialo-bg.png',
             $style: {
               width: 'calc(100% - 64px)',
               height: 'auto',
