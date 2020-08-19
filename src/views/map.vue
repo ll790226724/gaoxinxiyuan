@@ -153,7 +153,7 @@ export const map = {
         selectAreaOptions: [],
         currentCompany: '',
         showState: false,
-        tableHeader: [{field: 'company_name', value: '企业名称'}, {field: 'registered_address', value: '注册地址'}, {field: 'actual_address', value: '实际地址'}, {field: 'industry', value: '行业领域'}, {field: 'main_business', value: '主营业务'}, {field: 'header_name', value: '单位负责人姓名'}, {field: 'header_phone', value: '单位负责人电话'}, {field: 'area', value: '场地总面积'}, {field: 'number', value: '从业人数（人）'}, {field: 'security_name', value: '安全负责人姓名'}, {field: 'sucurity_phone', value: '安全负责人电话'}],
+        tableHeader: [{field: 'company_name', value: '企业名称'}, {field: 'registered_address', value: '注册地址'}, {field: 'actual_address', value: '实际地址'}, {field: 'industry', value: '行业领域'}, {field: 'main_business', value: '主营业务'}, {field: 'header_name', value: '单位负责人姓名'}, {field: 'header_phone', value: '单位负责人电话'}, {field: 'area', value: '场地总面积'}, {field: 'number', value: '从业人数（人）'}, {field: 'security_name', value: '安全负责人姓名'}, {field: 'sucurity_phone', value: '安全负责人电话'}, {field: 'legal_name', value: '法定代表人姓名'}, {field: 'legal_phone', value: '法定代表人电话'}, {field: 'commercial_building', value: '是否位于商务商业楼宇'}, {field: 'fuel_gas', value: '是否涉及使用燃气'}, {field: 'gauge', value: '是否为规上企业'}, {field: 'hazardous_chemicals', value: '是否涉及危险化学品'}, {field: 'enterprise_classification', value: '危化品企业分类'}, {field: 'species', value: '危化品种类'}],
         safetyOfficerData: [{id: '0047dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全总负责人'}, {id: '0057dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全第一负责人'}, {id: '0067dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全第二负责人'}],
       },
     }

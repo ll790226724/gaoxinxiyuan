@@ -8,6 +8,14 @@
           <img src="/zhyq/icon/download-circle.svg" @click="downloadImg(url)" />
         </div>
       </template>
+      <template v-else>
+        <div class="no-picture">
+          <div>
+            <img src="/zhyq/icon/img-o.svg" alt="">
+            <p>占无图片</p>
+          </div>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -84,6 +92,26 @@ export default {
     &:hover .mask {
       display: flex;
     }
+    .no-picture {
+      display: flex;
+      height: 596px;
+      background-image: url('/zhyq/images/img-none.png');
+      justify-content: center;
+      align-items: center;
+      & > div {
+        text-align: center;
+      }
+      img {
+        width: 40px;
+        height: 40px;
+      }
+      p {
+        margin-top: 10px;
+        color: rgba(#fff, .8);
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
   }
 }
 </style>
@@ -98,12 +126,27 @@ export default {
 }
 
 .viewer-footer {
-  bottom: 60px !important;
+  bottom: 20px !important;
+}
+
+.viewer-container {
+  width: 1200px;
+  height: 800px;
+  margin: auto;
 }
 
 .viewer-canvas {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.viewer-toolbar > ul > li {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.viewer-toolbar > ul > li::before {
+  margin: 5px !important;
 }
 </style>
