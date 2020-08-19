@@ -8,6 +8,6 @@
         <mask id="mask-2" fill="white">
             <use xlink:href="#path-1"></use>
         </mask>
-        <use id="形状" fill="#555555" fill-rule="nonzero" opacity="0.8" xlink:href="#path-1"></use>
+        <use id="形状" fill="#8c91a0" fill-rule="nonzero" opacity="0.8" xlink:href="#path-1"></use>
     </g>
 </svg>

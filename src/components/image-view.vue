@@ -4,8 +4,8 @@
       <template v-if="url">
         <img :src="url" class="image" v-viewer="options" />
         <div class="mask">
-          <img src="/gaoxinxiyuan/images/icon/search-plus-circle.svg" @click="preview" />
-          <img src="/gaoxinxiyuan/images/icon/download-circle.svg" @click="downloadImg(url)" />
+          <img src="/zhyq/icon/search-plus-circle.svg" @click="preview" />
+          <img src="/zhyq/icon/download-circle.svg" @click="downloadImg(url)" />
         </div>
       </template>
     </div>

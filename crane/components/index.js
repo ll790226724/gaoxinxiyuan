@@ -177,7 +177,7 @@ module.exports = {
           component: 'img',
           position: [32, 84],
           props: {
-            src: '/gaoxinxiyuan/images/dialo-bg.png',
+            src: '/zhyq/images/dialo-bg.png',
             $style: {
               width: 'calc(100% - 64px)',
               height: 'auto',
