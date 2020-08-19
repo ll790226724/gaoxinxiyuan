@@ -42,13 +42,13 @@
     <div ref="company-type-tab" :style="{display: 'flex', position: 'absolute', top: '32px', left: '1528px'}">
       <div @click="()=>[setState('currentCompanyTag', 'fireFighting'), setState('showState', false)]" :class="fireSelected" :style="{height: '48px', width: '180px', fontSize: '18px', lineHeight: '24px'}">
         <img src="/zhyq/icon/flamethrower.svg" />
-        <span>
+        <span :style="{marginLeft: '4px'}">
           消防重点企业
         </span>
       </div>
       <div @click="()=>[setState('currentCompanyTag', 'dangerousChemical'), setState('showState', false)]" :class="dangerousSelected" :style="{height: '48px', width: '180px', fontSize: '18px', lineHeight: '24px'}">
         <img src="/zhyq/icon/skeleton.svg" />
-        <span>
+        <span :style="{marginLeft: '4px'}">
           危化品企业
         </span>
       </div>

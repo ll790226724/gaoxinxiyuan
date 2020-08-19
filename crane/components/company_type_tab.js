@@ -33,6 +33,11 @@ module.exports = {
         },
         {
           component: 'span',
+          props: {
+            $style: {
+              marginLeft: '4px'
+            }
+          },
           content: '消防重点企业'
         }
       ]
@@ -62,6 +67,11 @@ module.exports = {
         },
         {
           component: 'span',
+          props: {
+            $style: {
+              marginLeft: '4px'
+            }
+          },
           content: '危化品企业'
         }
       ]

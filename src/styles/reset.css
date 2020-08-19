@@ -37,15 +37,16 @@
   font-size: 18px;
   color: #fff;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 }
+
 .tab--active {
   background-color: #fa6400;
   font-size: 18px;
   color: #fff;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 }
 
