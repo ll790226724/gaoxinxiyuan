@@ -9,6 +9,11 @@ export default new Router({
   base: '/',
   routes: [
     {
+      name: 'map',
+      path: '/map',
+      component: pages.map,
+    },
+    {
       name: 'enterprise_detail',
       path: '/enterpriseDetail',
       component: pages.enterprise_detail,

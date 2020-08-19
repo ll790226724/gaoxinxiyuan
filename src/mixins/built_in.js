@@ -55,5 +55,10 @@ export default {
     sum (a, b) {
       return a + b
     },
+
+    getMapScale () {
+      const scaleValue = document.body.style.transform.match(/scale\(([\.\d]+)\)/)[1]
+      return scaleValue
+    },
   },
 }

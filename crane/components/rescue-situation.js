@@ -1,9 +1,10 @@
+const safetyOfficer = require('./safety-officer')
 module.exports = [
     {
         component: 'img',
-        position: [1310, 132],
+        position: [692, 132],
         props: {
-            src: '/gaoxinxiyuan/images/icon/flamethrower-circle.svg',
+            src: '/gaoxinxiyuan/images/icon/lightning-circle.svg',
             $style: {
                 width: '24px',
                 height: '24px',
@@ -12,8 +13,8 @@ module.exports = [
     },
     {
         component: 'div',
-        position: [1350, 131],
-        content: '危化品平面位置摆放图（含应急出口）',
+        position: [732, 131],
+        content: '应急救援情况（含应急方案图）',
         props: {
             $style: {
                 width: '498px',
@@ -25,16 +26,17 @@ module.exports = [
             }
         }
     },
+    ...safetyOfficer,
     {
         component: '@byzanteam/vis-components/data-loader',
-        position: [1350, 204],
+        position: [732, 204],
         exports: {
             results: 'results',
         },
         props: {
-            url: `/v1/components/0177dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data`,
+            url: `/v1/components/0137dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data`,
             $params: {
-                $name: 'craneStates.enterpriseName'
+                $name: 'craneStates.currentCompany'
             },
             $style: {
                 width: '466px',

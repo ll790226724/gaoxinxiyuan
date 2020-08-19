@@ -28,7 +28,7 @@ module.exports = [
                 lineHeight: '28px',
                 fontWeight: '600',
             },
-            'v-text': 'craneStates.enterpriseName'
+            'v-text': 'craneStates.currentCompany'
         }
     },
     enterpriseTable,

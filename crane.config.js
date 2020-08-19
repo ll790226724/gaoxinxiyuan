@@ -1,5 +1,4 @@
-// const map = require('./crane/components/index')
-const enterpriseDetail = require('./crane/enterprise-detail/index')
+const components = require('./crane/components/index')
 
 module.exports = {
   name: 'gaoxinxiyuan',
@@ -15,9 +14,15 @@ module.exports = {
         path: 'dist/map-ui.css',
       },
     },
+    'view-design': {
+      version: 'latest',
+      style: {
+        type: 'normal',
+        path: 'dist/styles/iview.css',
+      },
+    },
   },
   pages: [
-    // map
-    enterpriseDetail
+    components,
   ]
 }

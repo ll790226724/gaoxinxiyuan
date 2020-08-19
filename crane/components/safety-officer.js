@@ -42,7 +42,7 @@ module.exports = [
                         props: {
                             url: `/v1/components/id/data`,
                             $params: {
-                                $name: 'craneStates.enterpriseName',
+                                $name: 'craneStates.currentCompany',
                             },
                             $style: {
                                 display: 'flex',

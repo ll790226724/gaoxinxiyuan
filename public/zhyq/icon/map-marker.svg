@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon/map-marker</title>
+    <defs>
+        <path d="M12,0 C16.9705627,0 21,4.02943725 21,9 C21,13.9705627 14.300529,24 12,24 C9.69947104,24 3,13.9705627 3,9 C3,4.02943725 7.02943725,0 12,0 Z M12,5 C9.790861,5 8,6.790861 8,9 C8,11.209139 9.790861,13 12,13 C14.209139,13 16,11.209139 16,9 C16,6.790861 14.209139,5 12,5 Z" id="path-1"></path>
+    </defs>
+    <g id="icon/map-marker" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="形状结合" fill="#ffffff80" xlink:href="#path-1"></use>
+    </g>
+</svg>

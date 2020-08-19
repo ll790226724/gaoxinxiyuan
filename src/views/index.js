@@ -1,1 +1,1 @@
-export * from './enterprise_detail'
+export * from './map'
