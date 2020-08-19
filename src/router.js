@@ -9,8 +9,13 @@ export default new Router({
   base: '/',
   routes: [
     {
-      name: 'map',
+      name: 'default',
       path: '/',
+      component: pages.map,
+    },
+    {
+      name: 'map',
+      path: '/map',
       component: pages.map,
     },
   ],
