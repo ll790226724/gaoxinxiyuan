@@ -18,7 +18,7 @@
     </data-loader>
     <data-loader ref="company_select" @requestDone="(params)=>[setState('selectAreaOptions', params.results ? params.results.map(item => ({name: item[0], address: item[1]})) : [])]" :url="`/v1/components/${companySelectData}/data`" method="get" :data="[['']]" :style="{position: 'absolute', top: '32px', left: '32px'}">
       <Select class="company-select" :filterable="true" :clearable="true" :style="{width: '400px', height: '48px'}" v-model="craneStates.currentCompany">
-        <img ref="search-icon" :style="{height: '20px', width: '20px'}" src="/zhyq/icon/search.svg" slot="prefix" />
+        <img ref="search-icon" :style="{paddingTop: '2px', height: '22px', width: '22px', marginLeft: '12px'}" src="/zhyq/icon/search.svg" slot="prefix" />
         <Option v-for="(item, key) in craneStates.selectAreaOptions" :key="key" :value="item.name" :label="item.name">
           <div ref="option-box" :style="{display: 'flex'}">
             <div ref="index-column" class="index-column">

@@ -32,8 +32,10 @@ module.exports = {
           component: 'img',
           props: {
             $style: {
-              height: '20px',
-              width: '20px',
+              paddingTop: '2px',
+              height: '22px',
+              width: '22px',
+              marginLeft: '12px'
             },
             src: '/zhyq/icon/search.svg',
             slot: 'prefix',
