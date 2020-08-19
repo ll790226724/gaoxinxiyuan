@@ -9,6 +9,24 @@
   border-radius: 2px;
 }
 
+.label-marker:after{
+  display:block;
+  content:'';
+  border-width:8px 8px 8px 8px;
+  border-style:solid;
+  border-color:transparent #c25805 transparent transparent;
+
+  /* 定位 */
+  position:absolute;
+  left: 57px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.label-marker:hover:after {
+  border-color:transparent #fa6400 transparent transparent;
+}
+
 .label-marker:hover {
   background-color: #fa6400;
   color: #fff;
