@@ -57,7 +57,7 @@
 
 .ivu-select-selection {
   background-color: #232B39;
-  border: 1px solid #232B39;
+  border: none;
 }
 
 .ivu-select-single .ivu-select-selection {
@@ -75,14 +75,14 @@
   color: rgba(255, 255, 255, .4)
 }
 
-.ivu-select-selection-focused, .ivu-select-selection:hover {
-  border: none;
-}
-
 .ivu-icon-ios-search:before {
   color: rgba(255, 255, 255, .4)
 }
 
+.ivu-select-arrow {
+  font-size: 20px;
+  right: 12px;
+}
 
 .ivu-select-head-flex {
   height: inherit;
