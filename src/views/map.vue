@@ -17,7 +17,7 @@
       </base-map>
     </data-loader>
     <data-loader ref="company_select" @requestDone="(params)=>[setState('selectAreaOptions', params.results ? params.results.map(item => ({name: item[0], address: item[1]})) : [])]" :url="`/v1/components/${companySelectData}/data`" method="get" :data="[['']]" :style="{position: 'absolute', top: '32px', left: '32px'}">
-      <Select class="company-select" :filterable="true" :clearable="true" :style="{width: '400px', height: '48px'}" v-model="craneStates.currentCompany">
+      <Select class="company-select" :filterable="true" :clearable="true" :style="{width: '400px', height: '48px'}" v-model="craneStates.selectCompany">
         <img ref="search-icon" :style="{paddingTop: '2px', height: '22px', width: '22px', marginLeft: '12px'}" src="/zhyq/icon/search.svg" slot="prefix" />
         <Option v-for="(item, key) in craneStates.selectAreaOptions" :key="key" :value="item.name" :label="item.name">
           <div ref="option-box" :style="{display: 'flex'}">
@@ -134,7 +134,6 @@ export const map = {
       fireFightingCompany: gcoord.transform(fireFightingGeoJson, gcoord.WGS84, gcoord.GCJ02),
       dangerousChemicalCompany: gcoord.transform(dangerousChemicalGeoJson, gcoord.WGS84, gcoord.GCJ02),
       craneStates: {
-        showState: false,
         dangerousChemicalAreaStyle: {strokeColor: '#Fa6400', fillColor: '#Fa64004D', strokeStyle: 'dashed', fillOpacity: 0.2, strokeWeight: 3},
         dangerousChemicalHoverStyle: {strokeColor: '#Fa6400', fillColor: '#Fa640066', strokeStyle: 'dashed', fillOpacity: 0.2, strokeWeight: 3},
         fireFightingAreaStyle: {strokeColor: '#Fa6400', fillColor: '#Fa64004D', strokeStyle: 'dashed', fillOpacity: 0.2, strokeWeight: 3},
@@ -185,8 +184,12 @@ export const map = {
       overlays.forEach(overlay => {
         overlay.hide()
       })
-      this.craneStates.currentCompany = ''
+      this.craneStates.selectCompany = ''
     },
+    'craneStates.selectCompany'(value) {
+      this.craneStates.currentCompany = value
+      this.craneStates.showState = true
+    }
   },
 
   computed: {

@@ -24,7 +24,7 @@ module.exports = {
           width: '400px',
           height: '48px'
         },
-        'v-model': 'craneStates.currentCompany'
+        'v-model': 'craneStates.selectCompany'
       },
       children: [
         {

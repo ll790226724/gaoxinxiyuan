@@ -13,10 +13,6 @@ module.exports = {
   title: '高新西园智慧园区',
   states: [
     {
-      id: 'showState',
-      value: false,
-    },
-    {
       id: 'dangerousChemicalAreaStyle',
       value: {strokeColor: '#Fa6400', fillColor: '#Fa64004D', strokeStyle: 'dashed', fillOpacity: 0.2, strokeWeight: 3}
     },
@@ -93,6 +89,10 @@ module.exports = {
     {
       id: 'currentCompany',
       value: '成都中光电科技有限公司',
+    },
+    {
+      id: 'selectCompany',
+      value: '',
     },
     {
       id: 'tableHeader',
