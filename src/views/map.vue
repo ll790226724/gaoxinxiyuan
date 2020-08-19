@@ -167,17 +167,13 @@ export const map = {
     'craneStates.currentCompany' (row) {
       if (this.craneStates.currentCompanyTag === 'dangerousChemical') {
         let point = _.find(this.craneStates.dangerousChemicalCompanyBuildingData, item => (item.name === row))
-        if(!point) {
-          this.resizeMap(16, this.craneStates.mapOptions.center)
-        } else {
+        if(point) {
           this.resizeMap(16, point.point)
         }
       }
       if (this.craneStates.currentCompanyTag === 'fireFighting') {
         let point = _.find(this.craneStates.fireFightingCompanyBuildingData, item => (item.name === row))
-        if(!point) {
-          this.resizeMap(16, this.craneStates.mapOptions.center)
-        } else {
+        if(point) {
           this.resizeMap(16, point.point)
         }
       }
@@ -189,6 +185,7 @@ export const map = {
       overlays.forEach(overlay => {
         overlay.hide()
       })
+      this.craneStates.currentCompany = ''
     },
   },
 
