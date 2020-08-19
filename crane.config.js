@@ -1,5 +1,4 @@
 const components = require('./crane/components/index')
-const enterpriseDetail = require('./crane/enterprise-detail/index')
 
 module.exports = {
   name: 'gaoxinxiyuan',
@@ -25,6 +24,5 @@ module.exports = {
   },
   pages: [
     components,
-    enterpriseDetail
   ]
 }
