@@ -96,6 +96,7 @@ export default {
       display: flex;
       height: 596px;
       background-image: url('/zhyq/images/img-none.png');
+      background-size: 100%;
       justify-content: center;
       align-items: center;
       & > div {
