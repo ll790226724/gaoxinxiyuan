@@ -108,7 +108,7 @@ module.exports = {
                 $marker: "marker",
                 $offset: 'craneStates.leftLabelsConfig.offset',
                 $anchor: "craneStates.leftLabelsConfig.options.anchor",
-                $content: "`<div style='display: flex; align-items: center;'><img style='height: 10px;' src='https://slp-qiniu-beta.skylarkly.com/Fj3dfxguTdyghUKmWIHSMsVDpBiY'/><div class='label-marker'>${marker.name}</div></div>`"
+                $content: "`<div style='display: flex; align-items: center;'><img style='height: 2px; margin-right: 10px' src='/zhyq/icon/line.svg'/><div class='label-marker'>${marker.name}</div></div>`"
               }
             },
           ]
@@ -155,7 +155,7 @@ module.exports = {
                 $marker: "marker",
                 $offset: 'craneStates.leftLabelsConfig.offset',
                 $anchor: "craneStates.leftLabelsConfig.options.anchor",
-                $content: "`<div style='display: flex; align-items: center;'><img style='height: 10px;' src='https://slp-qiniu-beta.skylarkly.com/Fj3dfxguTdyghUKmWIHSMsVDpBiY'/><div class='label-marker'>${marker.name}</div></div>`"
+                $content: "`<div style='display: flex; align-items: center;'><img style='height: 2px; margin-right: 10px' src='/zhyq/icon/line.svg'/><div class='label-marker'>${marker.name}</div></div>`"
               }
             }
           ]

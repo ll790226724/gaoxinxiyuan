@@ -9,6 +9,24 @@
   border-radius: 2px;
 }
 
+.label-marker:after{
+  display:block;
+  content:'';
+  border-width:8px 8px 8px 8px;
+  border-style:solid;
+  border-color:transparent #c25805 transparent transparent;
+
+  /* 定位 */
+  position:absolute;
+  left: 57px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.label-marker:hover:after {
+  border-color:transparent #fa6400 transparent transparent;
+}
+
 .label-marker:hover {
   background-color: #fa6400;
   color: #fff;
@@ -19,16 +37,19 @@
   font-size: 18px;
   color: #fff;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
+
 .tab--active {
   background-color: #fa6400;
   font-size: 18px;
   color: #fff;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 /*下拉选择器*/
@@ -39,7 +60,8 @@
 
 .ivu-select-selection {
   background-color: #232B39;
-  border: 1px solid #232B39;
+  border: none;
+  cursor: text;
 }
 
 .ivu-select-single .ivu-select-selection {
@@ -50,6 +72,7 @@
   font-size: 18px;
   color: #fff;
   padding: 0 24px 0 12px;
+  cursor: text;
 }
 
 .ivu-select-input::placeholder {
@@ -57,14 +80,14 @@
   color: rgba(255, 255, 255, .4)
 }
 
-.ivu-select-selection-focused, .ivu-select-selection:hover {
-  border: none;
-}
-
 .ivu-icon-ios-search:before {
   color: rgba(255, 255, 255, .4)
 }
 
+.ivu-select-arrow {
+  font-size: 20px;
+  right: 12px;
+}
 
 .ivu-select-head-flex {
   height: inherit;
@@ -103,7 +126,7 @@
 .index-column {
   font-size: 18px;
   color: #ffffff;
-  line-height: 18px;
+  line-height: 24px;
   padding: 16px 12px 12px 0;
 }
 

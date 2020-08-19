@@ -9,16 +9,16 @@
           <regions ref="dangerousChemicalRegions" @area-clicked="(geoJSON, area)=>[setState('selectedArea', area), setState('showState', true)]" :areas="dangerousChemicalCompany.features" :areaStyle="craneStates.dangerousChemicalAreaStyle" :areaHoverStyle="craneStates.dangerousChemicalHoverStyle" />
         </div>
         <data-loader @requestDone="(param)=>[setState('fireFightingCompanyBuildingData', param.results ? param.results.map(item => ({name: item[0], point: [item[1][1], item[1][0]], labelMarker: true, })) : [])]" v-if="fireFightingMarkerShow" :url="`/v1/components/0007dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data`" method="get" :data="[['']]">
-          <custom-marker ref="fireFightingBuildingMarker" v-for="(marker, index) in craneStates.fireFightingCompanyBuildingData" :key="index + marker.point[0] + marker.point[1] + marker.tag + marker.name" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentCompany', marker.target.getExtData().name), setState('showState', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" :offset="craneStates.leftLabelsConfig.offset" :anchor="craneStates.leftLabelsConfig.options.anchor" :content="`<div style='display: flex; align-items: center;'><img style='height: 10px;' src='https://slp-qiniu-beta.skylarkly.com/Fj3dfxguTdyghUKmWIHSMsVDpBiY'/><div class='label-marker'>${marker.name}</div></div>`" />
+          <custom-marker ref="fireFightingBuildingMarker" v-for="(marker, index) in craneStates.fireFightingCompanyBuildingData" :key="index + marker.point[0] + marker.point[1] + marker.tag + marker.name" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentCompany', marker.target.getExtData().name), setState('showState', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" :offset="craneStates.leftLabelsConfig.offset" :anchor="craneStates.leftLabelsConfig.options.anchor" :content="`<div style='display: flex; align-items: center;'><img style='height: 2px; margin-right: 10px' src='/zhyq/icon/line.svg'/><div class='label-marker'>${marker.name}</div></div>`" />
         </data-loader>
         <data-loader @requestDone="(param)=>[setState('dangerousChemicalCompanyBuildingData', param.results ? param.results.map(item => ({name: item[0], point: [item[1][1], item[1][0]], labelMarker: true, })) : [])]" v-if="dangerousChemicalMarkerShow" :url="`/v1/components/0107dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data`" method="get" :data="[['']]">
-          <custom-marker ref="dangerousChemicalBuildingMarker" v-for="(marker, index) in craneStates.dangerousChemicalCompanyBuildingData" :key="marker.point[0] + marker.point[1] + marker.tag + marker.name + index" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentCompany', marker.target.getExtData().name), setState('showState', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" :offset="craneStates.leftLabelsConfig.offset" :anchor="craneStates.leftLabelsConfig.options.anchor" :content="`<div style='display: flex; align-items: center;'><img style='height: 10px;' src='https://slp-qiniu-beta.skylarkly.com/Fj3dfxguTdyghUKmWIHSMsVDpBiY'/><div class='label-marker'>${marker.name}</div></div>`" />
+          <custom-marker ref="dangerousChemicalBuildingMarker" v-for="(marker, index) in craneStates.dangerousChemicalCompanyBuildingData" :key="marker.point[0] + marker.point[1] + marker.tag + marker.name + index" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentCompany', marker.target.getExtData().name), setState('showState', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" :offset="craneStates.leftLabelsConfig.offset" :anchor="craneStates.leftLabelsConfig.options.anchor" :content="`<div style='display: flex; align-items: center;'><img style='height: 2px; margin-right: 10px' src='/zhyq/icon/line.svg'/><div class='label-marker'>${marker.name}</div></div>`" />
         </data-loader>
       </base-map>
     </data-loader>
     <data-loader ref="company_select" @requestDone="(params)=>[setState('selectAreaOptions', params.results ? params.results.map(item => ({name: item[0], address: item[1]})) : [])]" :url="`/v1/components/${companySelectData}/data`" method="get" :data="[['']]" :style="{position: 'absolute', top: '32px', left: '32px'}">
       <Select class="company-select" :filterable="true" :clearable="true" :style="{width: '400px', height: '48px'}" v-model="craneStates.currentCompany">
-        <img ref="search-icon" :style="{height: '20px', width: '20px'}" src="/zhyq/icon/search.svg" slot="prefix" />
+        <img ref="search-icon" :style="{paddingTop: '2px', height: '22px', width: '22px', marginLeft: '12px'}" src="/zhyq/icon/search.svg" slot="prefix" />
         <Option v-for="(item, key) in craneStates.selectAreaOptions" :key="key" :value="item.name" :label="item.name">
           <div ref="option-box" :style="{display: 'flex'}">
             <div ref="index-column" class="index-column">
@@ -42,13 +42,13 @@
     <div ref="company-type-tab" :style="{display: 'flex', position: 'absolute', top: '32px', left: '1528px'}">
       <div @click="()=>[setState('currentCompanyTag', 'fireFighting'), setState('showState', false)]" :class="fireSelected" :style="{height: '48px', width: '180px', fontSize: '18px', lineHeight: '24px'}">
         <img src="/zhyq/icon/flamethrower.svg" />
-        <span>
+        <span :style="{marginLeft: '4px'}">
           消防重点企业
         </span>
       </div>
       <div @click="()=>[setState('currentCompanyTag', 'dangerousChemical'), setState('showState', false)]" :class="dangerousSelected" :style="{height: '48px', width: '180px', fontSize: '18px', lineHeight: '24px'}">
         <img src="/zhyq/icon/skeleton.svg" />
-        <span>
+        <span :style="{marginLeft: '4px'}">
           危化品企业
         </span>
       </div>
@@ -167,17 +167,13 @@ export const map = {
     'craneStates.currentCompany' (row) {
       if (this.craneStates.currentCompanyTag === 'dangerousChemical') {
         let point = _.find(this.craneStates.dangerousChemicalCompanyBuildingData, item => (item.name === row))
-        if(!point) {
-          this.resizeMap(16, this.craneStates.mapOptions.center)
-        } else {
+        if(point) {
           this.resizeMap(16, point.point)
         }
       }
       if (this.craneStates.currentCompanyTag === 'fireFighting') {
         let point = _.find(this.craneStates.fireFightingCompanyBuildingData, item => (item.name === row))
-        if(!point) {
-          this.resizeMap(16, this.craneStates.mapOptions.center)
-        } else {
+        if(point) {
           this.resizeMap(16, point.point)
         }
       }
@@ -189,6 +185,7 @@ export const map = {
       overlays.forEach(overlay => {
         overlay.hide()
       })
+      this.craneStates.currentCompany = ''
     },
   },
 
