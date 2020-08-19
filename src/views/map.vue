@@ -115,7 +115,6 @@ import ImageView from '../components/image-view'
 import fireFightingGeoJson from '../../public/zhyq/geojson/fireFighting.json'
 import dangerousChemicalGeoJson from '../../public/zhyq/geojson/dangerousChemical.json'
 import gcoord from 'gcoord'
-import { transform, WGS84, GCJ02 } from 'gcoord'
 
 export const map = {
   mixins: [BuiltInMixin],
