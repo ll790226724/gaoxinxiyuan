@@ -139,7 +139,7 @@ export const map = {
         fireFightingAreaStyle: {strokeColor: '#Fa6400', fillColor: '#Fa64004D', strokeStyle: 'dashed', fillOpacity: 0.2, strokeWeight: 3},
         fireFightingAreaHoverStyle: {strokeColor: '#Fa6400', fillColor: '#Fa640066', strokeStyle: 'dashed', fillOpacity: 0.2, strokeWeight: 3},
         currentCompanyTag: 'fireFighting',
-        selectedArea: {},
+        selectedArea: null,
         fireFightingMarkers: [],
         dangerousChemicalMarkers: [],
         labelMarkerInitialed: true,
