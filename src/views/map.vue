@@ -159,9 +159,11 @@ export const map = {
 
   watch: {
     'craneStates.selectedArea' (value) {
-      const [geojson] = value.toGeoJSON()
-      this.craneStates.currentCompany = geojson.properties.name
-      this.resizeMap(16, geojson.properties.coordinate)
+      if(value) {
+        const [geojson] = value.toGeoJSON()
+        this.craneStates.currentCompany = geojson.properties.name
+        this.resizeMap(16, geojson.properties.coordinate)
+      }
     },
     'craneStates.currentCompany' (row) {
       if (this.craneStates.currentCompanyTag === 'dangerousChemical') {
@@ -184,11 +186,13 @@ export const map = {
       overlays.forEach(overlay => {
         overlay.hide()
       })
-      this.craneStates.selectCompany = ''
+      this.craneStates.currentCompany = ''
     },
     'craneStates.selectCompany'(value) {
-      this.craneStates.currentCompany = value
-      this.craneStates.showState = true
+      if(value) {
+        this.craneStates.currentCompany = value
+        this.craneStates.showState = true
+      }
     }
   },
 
