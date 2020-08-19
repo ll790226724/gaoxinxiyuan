@@ -39,6 +39,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .tab--active {
@@ -48,6 +49,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 /*下拉选择器*/
@@ -59,6 +61,7 @@
 .ivu-select-selection {
   background-color: #232B39;
   border: none;
+  cursor: text;
 }
 
 .ivu-select-single .ivu-select-selection {
@@ -69,6 +72,7 @@
   font-size: 18px;
   color: #fff;
   padding: 0 24px 0 12px;
+  cursor: text;
 }
 
 .ivu-select-input::placeholder {
