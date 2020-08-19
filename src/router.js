@@ -13,5 +13,10 @@ export default new Router({
       path: '/',
       component: pages.map,
     },
+    {
+      name: 'map',
+      path: '/map',
+      component: pages.map,
+    },
   ],
 })
