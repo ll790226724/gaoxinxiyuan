@@ -6,17 +6,12 @@ Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  base: '/',
+  base: '/gxxy',
   routes: [
     {
       name: 'map',
-      path: '/map',
+      path: '/',
       component: pages.map,
-    },
-    {
-      name: 'enterprise_detail',
-      path: '/enterpriseDetail',
-      component: pages.enterprise_detail,
     },
   ],
 })
