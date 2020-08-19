@@ -10,13 +10,8 @@ export default new Router({
   routes: [
     {
       name: 'map',
-      path: '/map',
+      path: '/',
       component: pages.map,
-    },
-    {
-      name: 'enterprise_detail',
-      path: '/enterpriseDetail',
-      component: pages.enterprise_detail,
     },
   ],
 })
