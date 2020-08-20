@@ -4,7 +4,7 @@ module.exports = {
   name: 'gaoxinxiyuan',
   size: [1920, 1080],
   requestSettings: {
-    baseURL: 'http://vis.cdyoue.com:35005/',
+    baseURL: 'https://xyfw.cdht.gov.cn/',
   },
   modules: {
     '@byzanteam/map-ui': {
