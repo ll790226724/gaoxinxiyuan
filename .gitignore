@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 /crane-target
+/xywllz
 
 # local env files
 .env.local
