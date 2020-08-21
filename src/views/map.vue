@@ -187,6 +187,12 @@ export const map = {
         overlay.hide()
       })
       this.craneStates.currentCompany = ''
+      if(this.craneStates.currentCompanyTag === 'fireFighting') {
+        this.craneStates.safetyOfficerData = [{id: '0047dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全总负责人'}, {id: '0057dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全第一负责人'}, {id: '0067dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全第二负责人'}]
+      }
+      if(this.craneStates.currentCompanyTag === 'dangerousChemical') {
+        this.craneStates.safetyOfficerData = [{id: '0147dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全总负责人'}, {id: '0157dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全第一负责人'}, {id: '0167dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全第二负责人'}]
+      }
     },
     'craneStates.selectCompany'(value) {
       if(value) {
