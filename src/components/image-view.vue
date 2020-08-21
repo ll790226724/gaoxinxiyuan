@@ -136,15 +136,18 @@ export default {
   margin: auto;
 }
 
-.viewer-canvas {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .viewer-toolbar > ul > li {
   width: 30px !important;
   height: 30px !important;
+}
+
+.viewer-canvas > img {
+  margin-left: 0 !important;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto !important;
 }
 
 .viewer-toolbar > ul > li::before {
