@@ -12,7 +12,7 @@
         <div class="no-picture">
           <div>
             <img src="/zhyq/icon/img-o.svg" alt="">
-            <p>占无图片</p>
+            <p>暂无图片</p>
           </div>
         </div>
       </template>
