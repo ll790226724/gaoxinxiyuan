@@ -57,7 +57,7 @@
       <img ref="background" src="/zhyq/images/dialo-bg.png" :style="{width: 'calc(100% - 64px)', height: 'auto', position: 'absolute', top: '84px', left: '32px'}" />
       <img @click="()=>[setState('showState', !craneStates.showState)]" src="/zhyq/icon/times-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '48px'}" />
       <div :style="{width: '524px', height: '28px', color: '#fff', fontSize: '28px', lineHeight: '28px', fontWeight: '600', position: 'absolute', top: '130px', left: '88px'}" v-text="craneStates.currentCompany" />
-      <data-loader ref="enterpriseData" v-slot="{ results: results }" url="/v1/components/0027dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data" :style="{width: '618px', height: '848px', border: '1px solid rgba(255, 255, 255, .1)', overflow: 'hidden', position: 'absolute', top: '204px', left: '32px'}" :params="{name: craneStates.currentCompany}">
+      <data-loader ref="enterpriseData" v-slot="{ results: results }" :url="`/v1/components/${tableData}/data`" :style="{width: '618px', height: '848px', border: '1px solid rgba(255, 255, 255, .1)', overflow: 'hidden', position: 'absolute', top: '204px', left: '32px'}" :params="{name: craneStates.currentCompany}">
         <ul ref="enterpriseTable" :style="{height: '100%', overflowY: 'scroll'}" class="enterprise-table">
           <li v-for="(item, key) in craneStates.tableHeader" :key="key" :style="{display: 'flex', fontSize: '20px', fontWeight: '500', lineHeight: '30px'}">
             <div v-text="item.value" :style="{width: '182px', flexShrink: '0', verticalAlign: 'top', color: '#acb2c4', borderRight: '1px solid rgba(255, 255, 255, .1)', padding: '24px 16px'}" />
@@ -215,9 +215,17 @@ export const map = {
       }
       return 'tab--default'
     },
-    reqUrl(id){
+    reqUrl(id) {
       return function(id){
         return `/v1/components/${id}/data`
+      }
+    },
+    tableData() {
+      if(this.craneStates.currentCompanyTag === 'fireFighting') {
+        return '0027dd5e-d3ff-4c5f-9ab4-44d75afb40a1'
+      }
+      if(this.craneStates.currentCompanyTag === 'dangerousChemical') {
+        return '0127dd5e-d3ff-4c5f-9ab4-44d75afb40a1'
       }
     },
     companySelectData() {

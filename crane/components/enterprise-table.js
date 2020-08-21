@@ -6,7 +6,7 @@ module.exports = {
     results: 'results',
   },
   props: {
-    url: `/v1/components/0027dd5e-d3ff-4c5f-9ab4-44d75afb40a1/data`,
+    $url: "`/v1/components/${tableData}/data`",
     $style: {
       width: '618px',
       height: '848px',
