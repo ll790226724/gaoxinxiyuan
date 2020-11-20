@@ -21,7 +21,7 @@ module.exports = {
       },
       events: {
         'click': {
-          actions: ["setState('currentCompanyTag', 'fireFighting')", "setState('showState', false)"]
+          actions: ["setState('currentCompanyTag', 'fireFighting')", "setState('showState', false)", "setState('fireFightingCompanyBuildingData', getMarkerData())"]
         }
       },
       children: [
@@ -55,7 +55,7 @@ module.exports = {
       },
       events: {
         'click': {
-          actions: ["setState('currentCompanyTag', 'dangerousChemical')", "setState('showState', false)"]
+          actions: ["setState('currentCompanyTag', 'dangerousChemical')", "setState('showState', false)", "setState('fireFightingCompanyBuildingData', getMarkerData())"]
         }
       },
       children: [
