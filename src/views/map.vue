@@ -158,7 +158,7 @@ export const map = {
     'craneStates.selectedArea' (value) {
       if(value) {
         const [geojson] = value.toGeoJSON()
-        this.craneStates.currentCompany = geojson.properties.name
+        this.craneStates.currentCompany = geojson.properties.names[0]
         this.resizeMap(16, geojson.properties.coordinate)
       }
     },
@@ -284,6 +284,7 @@ export const map = {
 
     getMarkerData() {
       let companyData = []
+      const resultData = []
       switch (this.craneStates.currentCompanyTag) {
         case 'fireFighting':
           companyData = this.fireFightingCompany
@@ -292,15 +293,26 @@ export const map = {
           companyData = this.dangerousChemicalCompany
           break;
       }
-      return companyData.features && companyData.features.map(item=> {
+      companyData.features && companyData.features.forEach(item=> {
         let tempObj = {}
-        tempObj.name = item.properties.name
-        tempObj.point = this.getMidPoint(item.geometry.coordinates)
-        return tempObj
+        const namesLen = item.properties.names.length
+        if(namesLen > 1) {
+          item.properties.names.forEach((el, ind)=> {
+            let tempObj = {}
+            tempObj.name = el
+            tempObj.point = this.getMidPoint(item.geometry.coordinates, namesLen, ind)
+            resultData.push(tempObj)
+          })
+        } else {
+          tempObj.name = item.properties.names[0]
+          tempObj.point = this.getMidPoint(item.geometry.coordinates, namesLen, 0)
+          resultData.push(tempObj)
+        }
       })
+      return resultData
     },
 
-    getMidPoint(pointArr) {
+    getMidPoint(pointArr, namesLen, index) {
       const firstDataArr = []
       const secondDataArr = []
       pointArr && pointArr[0].forEach(item=> {
@@ -311,7 +323,7 @@ export const map = {
       const first_min_data = Math.min(...firstDataArr)
       const second_max_data = Math.max(...secondDataArr)
       const second_min_data = Math.min(...secondDataArr)
-      return [(first_max_data + first_min_data) / 2, (second_max_data + second_min_data) / 2]
+      return [(first_max_data - first_min_data) / (namesLen + 1) * (index + 1) + first_min_data, (second_max_data - second_min_data) / (namesLen + 1) * (index + 1) + second_min_data]
     },
 
   },
