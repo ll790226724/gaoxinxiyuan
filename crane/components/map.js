@@ -78,7 +78,7 @@ module.exports = {
               component: '@byzanteam/map-ui/custom-marker',
               id: 'fireFightingBuildingMarker',
               vfor: {
-                data: "craneStates.fireFightingCompanyBuildingData",
+                data: "craneStates.companyBuildingData",
                 exports: {item: 'marker', index: 'index'},
                 key: 'index + marker.point[0] + marker.point[1] + marker.tag + marker.name'
               },
