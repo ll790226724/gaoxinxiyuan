@@ -100,6 +100,7 @@
   top: 46px!important;
   background-color: #232B39;
   max-height: 970px;
+  overflow-x: hidden;
 }
 
 .ivu-select-item {
