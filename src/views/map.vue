@@ -9,7 +9,7 @@
           <regions ref="dangerousChemicalRegions" @area-clicked="(geoJSON, area)=>[setState('selectedArea', area), setState('showState', true)]" :areas="dangerousChemicalCompany.features" :areaStyle="craneStates.dangerousChemicalAreaStyle" :areaHoverStyle="craneStates.dangerousChemicalHoverStyle" />
         </div>
         <data-loader method="get" :data="[['']]">
-          <custom-marker ref="fireFightingBuildingMarker" v-for="(marker, index) in craneStates.companyBuildingData" :key="index + marker.point[0] + marker.point[1] + marker.tag + marker.name" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentCompany', marker.target.getExtData().name), setState('showState', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" :offset="craneStates.leftLabelsConfig.offset" :anchor="craneStates.leftLabelsConfig.options.anchor" :content="`<div style='display: flex; align-items: center;'><img style='height: 2px; margin-right: 10px' src='/zhyq/icon/line.svg'/><div class='label-marker'>${marker.name}</div></div>`" />
+          <custom-marker ref="fireFightingBuildingMarker" v-for="(marker, index) in craneStates.companyBuildingData" :key="index + marker.point[0] + marker.point[1] + marker.tag + marker.name" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentCompany', marker.target.getExtData().name), setState('selectCompany', marker.target.getExtData().name), setState('showState', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" :offset="craneStates.leftLabelsConfig.offset" :anchor="craneStates.leftLabelsConfig.options.anchor" :content="`<div style='display: flex; align-items: center;'><img style='height: 2px; margin-right: 10px' src='/zhyq/icon/line.svg'/><div class='label-marker'>${marker.name}</div></div>`" />
         </data-loader>
       </base-map>
     </data-loader>
@@ -158,12 +158,13 @@ export const map = {
     'craneStates.selectedArea' (value) {
       if(value) {
         const [geojson] = value.toGeoJSON()
-        this.craneStates.currentCompany = geojson.properties.names[0]
+        const currentCompany = geojson.properties.names[0]
+        this.craneStates.currentCompany = currentCompany
+        this.craneStates.selectCompany = currentCompany
         this.resizeMap(16, geojson.properties.coordinate)
       }
     },
     'craneStates.currentCompany' (row) {
-      this.craneStates.selectCompany = row
       let point = _.find(this.craneStates.companyBuildingData, item => (item.name === row))
       if(point) {
         this.resizeMap(16, point.point)
