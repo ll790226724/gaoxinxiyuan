@@ -15,6 +15,8 @@ module.exports = {
       props: {
         $mapOptions: "craneStates.mapOptions",
         $satellite: true,
+        $roadNet: true,
+        $features: "['bg', 'road', 'building']"
       },
       children: [
         // 显示消防重点的企业regions
@@ -78,7 +80,7 @@ module.exports = {
               component: '@byzanteam/map-ui/custom-marker',
               id: 'fireFightingBuildingMarker',
               vfor: {
-                data: "craneStates.fireFightingCompanyBuildingData",
+                data: "craneStates.companyBuildingData",
                 exports: {item: 'marker', index: 'index'},
                 key: 'index + marker.point[0] + marker.point[1] + marker.tag + marker.name'
               },

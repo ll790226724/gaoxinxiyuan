@@ -64,15 +64,11 @@ module.exports = {
     },
     {
       id: 'mapOptions',
-      value: "{zoom: 14, zooms: [14, 17], center: [103.902752,30.768677]}"
+      value: {zoom: 14, zooms: [14, 17], center: [103.902752,30.768677]}
     },
     {
-      id: 'fireFightingCompanyBuildingData',
+      id: 'companyBuildingData',
       value: ''
-    },
-    {
-      id: 'dangerousChemicalCompanyBuildingData',
-      value: []
     },
     {
       id: 'selectAreaOptions',
@@ -84,7 +80,7 @@ module.exports = {
     },
     {
       id: 'showState',
-      value: true,
+      value: false,
     },
     {
       id: 'currentCompany',

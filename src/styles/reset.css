@@ -56,6 +56,10 @@
   box-shadow: none;
 }
 
+.ivu-icon-ios-arrow-down {
+  display: none !important;
+}
+
 .ivu-select-selection {
   background-color: #232B39;
   border: none;

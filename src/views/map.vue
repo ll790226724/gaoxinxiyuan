@@ -1,7 +1,7 @@
 <template>
   <div class="map">
     <data-loader :style="{transform: `scale(${1/getMapScale()})`, width: '100%', height: '100%', position: 'absolute', top: '0px', left: '0px'}">
-      <base-map ref="map" :mapOptions="craneStates.mapOptions" :satellite="true">
+      <base-map ref="map" :mapOptions="craneStates.mapOptions" :satellite="true" :roadNet="true" :features="['bg', 'road', 'building']">
         <div v-if="craneStates.currentCompanyTag === 'fireFighting'">
           <regions ref="fireFightingRegions" @area-clicked="(geoJSON, area)=>[setState('selectedArea', area), setState('showState', true)]" :areas="fireFightingCompany.features" :areaStyle="craneStates.fireFightingAreaStyle" :areaHoverStyle="craneStates.fireFightingAreaHoverStyle" />
         </div>
@@ -9,12 +9,12 @@
           <regions ref="dangerousChemicalRegions" @area-clicked="(geoJSON, area)=>[setState('selectedArea', area), setState('showState', true)]" :areas="dangerousChemicalCompany.features" :areaStyle="craneStates.dangerousChemicalAreaStyle" :areaHoverStyle="craneStates.dangerousChemicalHoverStyle" />
         </div>
         <data-loader method="get" :data="[['']]">
-          <custom-marker ref="fireFightingBuildingMarker" v-for="(marker, index) in craneStates.fireFightingCompanyBuildingData" :key="index + marker.point[0] + marker.point[1] + marker.tag + marker.name" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentCompany', marker.target.getExtData().name), setState('showState', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" :offset="craneStates.leftLabelsConfig.offset" :anchor="craneStates.leftLabelsConfig.options.anchor" :content="`<div style='display: flex; align-items: center;'><img style='height: 2px; margin-right: 10px' src='/zhyq/icon/line.svg'/><div class='label-marker'>${marker.name}</div></div>`" />
+          <custom-marker ref="fireFightingBuildingMarker" v-for="(marker, index) in craneStates.companyBuildingData" :key="index + marker.point[0] + marker.point[1] + marker.tag + marker.name" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentCompany', marker.target.getExtData().name), setState('showState', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" :offset="craneStates.leftLabelsConfig.offset" :anchor="craneStates.leftLabelsConfig.options.anchor" :content="`<div style='display: flex; align-items: center;'><img style='height: 2px; margin-right: 10px' src='/zhyq/icon/line.svg'/><div class='label-marker'>${marker.name}</div></div>`" />
         </data-loader>
       </base-map>
     </data-loader>
     <data-loader ref="company_select" @requestDone="(params)=>[setState('selectAreaOptions', params.results ? params.results.map(item => ({name: item[0], address: item[1]})) : [])]" :url="`/v1/components/${companySelectData}/data`" method="get" :data="[['']]" :style="{position: 'absolute', top: '32px', left: '32px'}">
-      <Select class="company-select" :filterable="true" :clearable="true" :style="{width: '400px', height: '48px'}" v-model="craneStates.selectCompany">
+      <Select class="company-select" :filterable="true" :clearable="true" placement="top-start" :style="{width: '400px', height: '48px'}" v-model="craneStates.selectCompany">
         <img ref="search-icon" :style="{paddingTop: '2px', height: '22px', width: '22px', marginLeft: '12px'}" src="/zhyq/icon/search.svg" slot="prefix" />
         <Option v-for="(item, key) in craneStates.selectAreaOptions" :key="key" :value="item.name" :label="item.name">
           <div ref="option-box" :style="{display: 'flex'}">
@@ -37,13 +37,13 @@
       </Select>
     </data-loader>
     <div ref="company-type-tab" :style="{display: 'flex', position: 'absolute', top: '32px', left: '1528px'}">
-      <div @click="()=>[setState('currentCompanyTag', 'fireFighting'), setState('showState', false), setState('fireFightingCompanyBuildingData', getMarkerData())]" :class="fireSelected" :style="{height: '48px', width: '180px', fontSize: '18px', lineHeight: '24px'}">
+      <div @click="()=>[setState('currentCompanyTag', 'fireFighting'), setState('showState', false), setState('companyBuildingData', getMarkerData())]" :class="fireSelected" :style="{height: '48px', width: '180px', fontSize: '18px', lineHeight: '24px'}">
         <img src="/zhyq/icon/flamethrower.svg" />
         <span :style="{marginLeft: '4px'}">
           消防重点企业
         </span>
       </div>
-      <div @click="()=>[setState('currentCompanyTag', 'dangerousChemical'), setState('showState', false), setState('fireFightingCompanyBuildingData', getMarkerData())]" :class="dangerousSelected" :style="{height: '48px', width: '180px', fontSize: '18px', lineHeight: '24px'}">
+      <div @click="()=>[setState('currentCompanyTag', 'dangerousChemical'), setState('showState', false), setState('companyBuildingData', getMarkerData())]" :class="dangerousSelected" :style="{height: '48px', width: '180px', fontSize: '18px', lineHeight: '24px'}">
         <img src="/zhyq/icon/skeleton.svg" />
         <span :style="{marginLeft: '4px'}">
           危化品企业
@@ -143,8 +143,7 @@ export const map = {
         leftLabelsConfig: {offset: [-2, 4], options: {anchor: 'middle-left'}},
         rightLabelsConfig: {offset: [-12, 4], options: {anchor: 'middle-left'}},
         mapOptions: {zoom: 14, zooms: [14, 17], center: [103.902752,30.768677]},
-        fireFightingCompanyBuildingData: [],
-        dangerousChemicalCompanyBuildingData: [],
+        companyBuildingData: '',
         selectAreaOptions: [],
         currentCompany: '',
         showState: false,
@@ -163,17 +162,9 @@ export const map = {
       }
     },
     'craneStates.currentCompany' (row) {
-      if (this.craneStates.currentCompanyTag === 'dangerousChemical') {
-        let point = _.find(this.craneStates.dangerousChemicalCompanyBuildingData, item => (item.name === row))
-        if(point) {
-          this.resizeMap(16, point.point)
-        }
-      }
-      if (this.craneStates.currentCompanyTag === 'fireFighting') {
-        let point = _.find(this.craneStates.fireFightingCompanyBuildingData, item => (item.name === row))
-        if(point) {
-          this.resizeMap(16, point.point)
-        }
+      let point = _.find(this.craneStates.companyBuildingData, item => (item.name === row))
+      if(point) {
+        this.resizeMap(16, point.point)
       }
     },
     'craneStates.currentCompanyTag'() {
@@ -195,6 +186,11 @@ export const map = {
       if(value) {
         this.craneStates.currentCompany = value
         this.craneStates.showState = true
+      }
+    },
+    'craneStates.showState'(value) {
+      if(value) {
+        document.body.click()
       }
     }
   },
@@ -258,7 +254,11 @@ export const map = {
   },
 
   created() {
-    this.setState('fireFightingCompanyBuildingData', this.getMarkerData())
+    this.setState('companyBuildingData', this.getMarkerData())
+  },
+
+  mounted () {
+    this.changeSelectInteractiveBehavior()
   },
 
   methods: {
@@ -324,6 +324,18 @@ export const map = {
       const second_max_data = Math.max(...secondDataArr)
       const second_min_data = Math.min(...secondDataArr)
       return [(first_max_data - first_min_data) / (namesLen + 1) * (index + 1) + first_min_data, (second_max_data - second_min_data) / (namesLen + 1) * (index + 1) + second_min_data]
+    },
+
+    changeSelectInteractiveBehavior() {
+      const selectDropdown = document.querySelector('.ivu-select-dropdown')
+      const selectHeaderFlex = document.querySelector('.ivu-select-head-flex')
+      selectHeaderFlex.onclick = (e)=> {
+        selectDropdown.style.display = 'block'
+        e.stopPropagation()
+      }
+      document.onclick = ()=>{
+        selectDropdown.style.display = 'none'
+      }
     },
 
   },
