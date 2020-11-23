@@ -52,7 +52,7 @@
     </div>
     <div ref="enterprise-detail" v-show="craneStates.showState">
       <img ref="background" src="/zhyq/images/dialo-bg.png" :style="{width: 'calc(100% - 64px)', height: 'auto', position: 'absolute', top: '84px', left: '32px'}" />
-      <img @click="()=>[setState('showState', !craneStates.showState)]" src="/zhyq/icon/times-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '48px'}" />
+      <img @click="()=>[setState('showState', !craneStates.showState), setState('selectCompany', '')]" src="/zhyq/icon/times-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '48px'}" />
       <div :style="{width: '524px', height: '28px', color: '#fff', fontSize: '28px', lineHeight: '28px', fontWeight: '600', position: 'absolute', top: '130px', left: '88px'}" v-text="craneStates.currentCompany" />
       <data-loader ref="enterpriseData" v-slot="{ results: results }" :url="`/v1/components/${tableData}/data`" :style="{width: '618px', height: '848px', border: '1px solid rgba(255, 255, 255, .1)', overflow: 'hidden', position: 'absolute', top: '204px', left: '32px'}" :params="{name: craneStates.currentCompany}">
         <ul ref="enterpriseTable" :style="{height: '100%', overflowY: 'scroll'}" class="enterprise-table">

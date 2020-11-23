@@ -12,7 +12,7 @@ module.exports = [
         },
         events: {
             'click': {
-                actions: ["setState('showState', !craneStates.showState)"]
+                actions: ["setState('showState', !craneStates.showState)", "setState('selectCompany', '')"]
             }
         },
     },
