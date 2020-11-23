@@ -53,7 +53,7 @@
     <div ref="enterprise-detail" v-show="craneStates.showState">
       <img ref="background" src="/zhyq/images/dialo-bg.png" :style="{width: 'calc(100% - 64px)', height: 'auto', position: 'absolute', top: '84px', left: '32px'}" />
       <img @click="()=>[setState('showState', !craneStates.showState), setState('selectCompany', '')]" src="/zhyq/icon/times-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '48px'}" />
-      <div :style="{width: '524px', height: '28px', color: '#fff', fontSize: '28px', lineHeight: '28px', fontWeight: '600', position: 'absolute', top: '130px', left: '88px'}" v-text="craneStates.currentCompany" />
+      <div :style="{width: '524px', height: '28px', color: '#fa6400', fontSize: '28px', lineHeight: '28px', fontWeight: '600', position: 'absolute', top: '130px', left: '88px'}" v-text="craneStates.currentCompany" />
       <data-loader ref="enterpriseData" v-slot="{ results: results }" :url="`/v1/components/${tableData}/data`" :style="{width: '618px', height: '848px', border: '1px solid rgba(255, 255, 255, .1)', overflow: 'hidden', position: 'absolute', top: '204px', left: '32px'}" :params="{name: craneStates.currentCompany}">
         <ul ref="enterpriseTable" :style="{height: '100%', overflowY: 'scroll'}" class="enterprise-table">
           <li v-for="(item, key) in craneStates.tableHeader" :key="key" :style="{display: 'flex', fontSize: '20px', fontWeight: '500', lineHeight: '30px'}">
@@ -63,7 +63,7 @@
         </ul>
       </data-loader>
       <img src="/zhyq/icon/lightning-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '692px'}" />
-      <div :style="{width: '498px', height: '26px', color: '#fff', fontSize: '26px', lineHeight: '26px', fontWeight: '400', position: 'absolute', top: '131px', left: '732px'}">
+      <div :style="{width: '498px', height: '26px', color: '#fa6400', fontSize: '26px', lineHeight: '26px', fontWeight: '400', position: 'absolute', top: '131px', left: '732px'}">
         应急救援情况（含应急方案图）
       </div>
       <img src="/zhyq/icon/user-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '913px', left: '712px'}" />
@@ -82,7 +82,7 @@
         <image-view :imgs="results && results[0]" />
       </data-loader>
       <img src="/zhyq/icon/flamethrower-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '1310px'}" />
-      <div :style="{width: '498px', height: '26px', color: '#fff', fontSize: '26px', lineHeight: '26px', fontWeight: '400', position: 'absolute', top: '131px', left: '1350px'}">
+      <div :style="{width: '498px', height: '26px', color: '#fa6400', fontSize: '26px', lineHeight: '26px', fontWeight: '400', position: 'absolute', top: '131px', left: '1350px'}">
         危化品平面位置摆放图（含应急出口）
       </div>
       <data-loader v-slot="{ results: results }" :url="`/v1/components/${chemicalsImg}/data`" :params="{name: craneStates.currentCompany}" :style="{width: '466px', height: '596px', overflowY: 'scroll', position: 'absolute', top: '204px', left: '1350px'}">
