@@ -21,7 +21,7 @@
             <div ref="index-column" class="index-column">
               {{(key + 1) + '.'}}
             </div>
-            <div ref="name-address-box" :style="{display: 'flex', flexFlow: 'column', paddingTop: '16px', paddingRight: '12px', paddingBottom: '16px'}">
+            <div ref="name-address-box" :style="{display: 'flex', width: '100%', flexFlow: 'column', paddingTop: '16px', paddingRight: '12px', paddingBottom: '16px'}">
               <div ref="company-name" class="company-name">
                 {{item.name}}
               </div>

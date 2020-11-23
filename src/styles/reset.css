@@ -96,6 +96,7 @@
 }
 
 .ivu-select-dropdown {
+  width: 400px !important;
   top: 46px!important;
   background-color: #232B39;
   max-height: 970px;
@@ -106,15 +107,27 @@
 }
 
 .ivu-select-item-selected, .ivu-select-item-selected:hover {
-  color: #fa6400;
+  background: rgba(255, 255, 255, .05);
 }
 
 .ivu-select-item-focus {
-  background: rgba(255, 255, 255, .05);
+  background: transparent;
 }
 
 .ivu-select-item:hover {
   background: rgba(255, 255, 255, .05);
+}
+
+.ivu-select-item:hover .index-column, .ivu-select-item:hover .company-name {
+  color: #fa6400;
+}
+
+/* .ivu-select-item-focus .index-column, .ivu-select-item-focus .company-name {
+  color: #fa6400;
+} */
+
+.ivu-select-item-selected .index-column, .ivu-select-item-selected .company-name {
+  color: #fa6400;
 }
 
 .company-name {
@@ -123,6 +136,9 @@
   font-weight: 400;
   line-height: 24px;
   padding-bottom: 4px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .index-column {
