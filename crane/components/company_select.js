@@ -20,6 +20,7 @@ module.exports = {
         class: 'company-select',
         $filterable: true,
         $clearable: true,
+        placement: 'top-start',
         $style: {
           width: '400px',
           height: '48px'
