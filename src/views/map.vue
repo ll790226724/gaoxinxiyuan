@@ -158,7 +158,13 @@ export const map = {
     'craneStates.selectedArea' (value) {
       if(value) {
         const [geojson] = value.toGeoJSON()
-        const currentCompany = geojson.properties.names[0]
+        const names = geojson.properties.names
+        let currentCompany = ''
+        if(typeof names === 'string') {
+          currentCompany = names
+        } else {
+          currentCompany = names[0]
+        }
         this.craneStates.currentCompany = currentCompany
         this.craneStates.selectCompany = currentCompany
         this.resizeMap(16, geojson.properties.coordinate)
@@ -299,7 +305,7 @@ export const map = {
       companyData.features && companyData.features.forEach(item=> {
         let tempObj = {}
         const namesLen = item.properties.names.length
-        if(namesLen > 1) {
+        if(typeof item.properties.names !== 'string') {
           item.properties.names.forEach((el, ind)=> {
             let tempObj = {}
             tempObj.name = el
@@ -307,8 +313,8 @@ export const map = {
             resultData.push(tempObj)
           })
         } else {
-          tempObj.name = item.properties.names[0]
-          tempObj.point = this.getMidPoint(item.geometry.coordinates, namesLen, 0)
+          tempObj.name = item.properties.names
+          tempObj.point = this.getMidPoint(item.geometry.coordinates, 1, 0)
           resultData.push(tempObj)
         }
       })
