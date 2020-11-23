@@ -187,6 +187,11 @@ export const map = {
         this.craneStates.currentCompany = value
         this.craneStates.showState = true
       }
+    },
+    'craneStates.showState'(value) {
+      if(value) {
+        document.body.click()
+      }
     }
   },
 
@@ -252,6 +257,10 @@ export const map = {
     this.setState('companyBuildingData', this.getMarkerData())
   },
 
+  mounted () {
+    this.changeSelectInteractiveBehavior()
+  },
+
   methods: {
     resizeMap(zoom, center) {
       this.$refs.map.map.setZoomAndCenter(zoom, center)
@@ -315,6 +324,18 @@ export const map = {
       const second_max_data = Math.max(...secondDataArr)
       const second_min_data = Math.min(...secondDataArr)
       return [(first_max_data - first_min_data) / (namesLen + 1) * (index + 1) + first_min_data, (second_max_data - second_min_data) / (namesLen + 1) * (index + 1) + second_min_data]
+    },
+
+    changeSelectInteractiveBehavior() {
+      const selectDropdown = document.querySelector('.ivu-select-dropdown')
+      const selectHeaderFlex = document.querySelector('.ivu-select-head-flex')
+      selectHeaderFlex.onclick = (e)=> {
+        selectDropdown.style.display = 'block'
+        e.stopPropagation()
+      }
+      document.onclick = ()=>{
+        selectDropdown.style.display = 'none'
+      }
     },
 
   },
