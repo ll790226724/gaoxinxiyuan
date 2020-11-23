@@ -15,6 +15,8 @@ module.exports = {
       props: {
         $mapOptions: "craneStates.mapOptions",
         $satellite: true,
+        $roadNet: true,
+        $features: "['bg', 'road', 'building']"
       },
       children: [
         // 显示消防重点的企业regions

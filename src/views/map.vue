@@ -1,7 +1,7 @@
 <template>
   <div class="map">
     <data-loader :style="{transform: `scale(${1/getMapScale()})`, width: '100%', height: '100%', position: 'absolute', top: '0px', left: '0px'}">
-      <base-map ref="map" :mapOptions="craneStates.mapOptions" :satellite="true">
+      <base-map ref="map" :mapOptions="craneStates.mapOptions" :satellite="true" :roadNet="true" :features="['bg', 'road', 'building']">
         <div v-if="craneStates.currentCompanyTag === 'fireFighting'">
           <regions ref="fireFightingRegions" @area-clicked="(geoJSON, area)=>[setState('selectedArea', area), setState('showState', true)]" :areas="fireFightingCompany.features" :areaStyle="craneStates.fireFightingAreaStyle" :areaHoverStyle="craneStates.fireFightingAreaHoverStyle" />
         </div>
