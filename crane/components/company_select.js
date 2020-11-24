@@ -76,6 +76,7 @@ module.exports = {
                   props: {
                     $style: {
                       display: 'flex',
+                      width: '100%',
                       flexFlow: 'column',
                       paddingTop: '16px',
                       paddingRight: '12px',

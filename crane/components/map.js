@@ -87,7 +87,7 @@ module.exports = {
               events: {
                 'marker-clicked': {
                   params: ['marker'],
-                  actions: ["setMarkerZindex(marker, 200)", "setState('currentCompany', marker.target.getExtData().name)", "setState('showState', true)"]
+                  actions: ["setMarkerZindex(marker, 200)", "setState('currentCompany', marker.target.getExtData().name)", "setState('selectCompany', marker.target.getExtData().name)", "setState('showState', true)"]
                 },
                 'marker-mouseover': {
                   params: ["marker"],

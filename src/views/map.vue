@@ -9,7 +9,7 @@
           <regions ref="dangerousChemicalRegions" @area-clicked="(geoJSON, area)=>[setState('selectedArea', area), setState('showState', true)]" :areas="dangerousChemicalCompany.features" :areaStyle="craneStates.dangerousChemicalAreaStyle" :areaHoverStyle="craneStates.dangerousChemicalHoverStyle" />
         </div>
         <data-loader method="get" :data="[['']]">
-          <custom-marker ref="fireFightingBuildingMarker" v-for="(marker, index) in craneStates.companyBuildingData" :key="index + marker.point[0] + marker.point[1] + marker.tag + marker.name" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentCompany', marker.target.getExtData().name), setState('showState', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" :offset="craneStates.leftLabelsConfig.offset" :anchor="craneStates.leftLabelsConfig.options.anchor" :content="`<div style='display: flex; align-items: center;'><img style='height: 2px; margin-right: 10px' src='/zhyq/icon/line.svg'/><div class='label-marker'>${marker.name}</div></div>`" />
+          <custom-marker ref="fireFightingBuildingMarker" v-for="(marker, index) in craneStates.companyBuildingData" :key="index + marker.point[0] + marker.point[1] + marker.tag + marker.name" @marker-clicked="(marker)=>[setMarkerZindex(marker, 200), setState('currentCompany', marker.target.getExtData().name), setState('selectCompany', marker.target.getExtData().name), setState('showState', true)]" @marker-mouseover="(marker)=>[markerMouseoverFunc(marker)]" @marker-mouseout="(marker)=>[markerMouseoutFunc(marker)]" :marker="marker" :offset="craneStates.leftLabelsConfig.offset" :anchor="craneStates.leftLabelsConfig.options.anchor" :content="`<div style='display: flex; align-items: center;'><img style='height: 2px; margin-right: 10px' src='/zhyq/icon/line.svg'/><div class='label-marker'>${marker.name}</div></div>`" />
         </data-loader>
       </base-map>
     </data-loader>
@@ -21,7 +21,7 @@
             <div ref="index-column" class="index-column">
               {{(key + 1) + '.'}}
             </div>
-            <div ref="name-address-box" :style="{display: 'flex', flexFlow: 'column', paddingTop: '16px', paddingRight: '12px', paddingBottom: '16px'}">
+            <div ref="name-address-box" :style="{display: 'flex', width: '100%', flexFlow: 'column', paddingTop: '16px', paddingRight: '12px', paddingBottom: '16px'}">
               <div ref="company-name" class="company-name">
                 {{item.name}}
               </div>
@@ -52,8 +52,8 @@
     </div>
     <div ref="enterprise-detail" v-show="craneStates.showState">
       <img ref="background" src="/zhyq/images/dialo-bg.png" :style="{width: 'calc(100% - 64px)', height: 'auto', position: 'absolute', top: '84px', left: '32px'}" />
-      <img @click="()=>[setState('showState', !craneStates.showState)]" src="/zhyq/icon/times-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '48px'}" />
-      <div :style="{width: '524px', height: '28px', color: '#fff', fontSize: '28px', lineHeight: '28px', fontWeight: '600', position: 'absolute', top: '130px', left: '88px'}" v-text="craneStates.currentCompany" />
+      <img @click="()=>[setState('showState', !craneStates.showState), setState('selectCompany', '')]" src="/zhyq/icon/times-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '48px'}" />
+      <div :style="{width: '524px', height: '28px', color: '#fa6400', fontSize: '28px', lineHeight: '28px', fontWeight: '600', position: 'absolute', top: '130px', left: '88px'}" v-text="craneStates.currentCompany" />
       <data-loader ref="enterpriseData" v-slot="{ results: results }" :url="`/v1/components/${tableData}/data`" :style="{width: '618px', height: '848px', border: '1px solid rgba(255, 255, 255, .1)', overflow: 'hidden', position: 'absolute', top: '204px', left: '32px'}" :params="{name: craneStates.currentCompany}">
         <ul ref="enterpriseTable" :style="{height: '100%', overflowY: 'scroll'}" class="enterprise-table">
           <li v-for="(item, key) in craneStates.tableHeader" :key="key" :style="{display: 'flex', fontSize: '20px', fontWeight: '500', lineHeight: '30px'}">
@@ -63,7 +63,7 @@
         </ul>
       </data-loader>
       <img src="/zhyq/icon/lightning-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '692px'}" />
-      <div :style="{width: '498px', height: '26px', color: '#fff', fontSize: '26px', lineHeight: '26px', fontWeight: '400', position: 'absolute', top: '131px', left: '732px'}">
+      <div :style="{width: '498px', height: '26px', color: '#fa6400', fontSize: '26px', lineHeight: '26px', fontWeight: '400', position: 'absolute', top: '131px', left: '732px'}">
         应急救援情况（含应急方案图）
       </div>
       <img src="/zhyq/icon/user-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '913px', left: '712px'}" />
@@ -82,7 +82,7 @@
         <image-view :imgs="results && results[0]" />
       </data-loader>
       <img src="/zhyq/icon/flamethrower-circle.svg" :style="{width: '24px', height: '24px', position: 'absolute', top: '132px', left: '1310px'}" />
-      <div :style="{width: '498px', height: '26px', color: '#fff', fontSize: '26px', lineHeight: '26px', fontWeight: '400', position: 'absolute', top: '131px', left: '1350px'}">
+      <div :style="{width: '498px', height: '26px', color: '#fa6400', fontSize: '26px', lineHeight: '26px', fontWeight: '400', position: 'absolute', top: '131px', left: '1350px'}">
         危化品平面位置摆放图（含应急出口）
       </div>
       <data-loader v-slot="{ results: results }" :url="`/v1/components/${chemicalsImg}/data`" :params="{name: craneStates.currentCompany}" :style="{width: '466px', height: '596px', overflowY: 'scroll', position: 'absolute', top: '204px', left: '1350px'}">
@@ -147,6 +147,7 @@ export const map = {
         selectAreaOptions: [],
         currentCompany: '',
         showState: false,
+        selectCompany: '',
         tableHeader: [{field: 'company_name', value: '企业名称'}, {field: 'registered_address', value: '注册地址'}, {field: 'actual_address', value: '实际地址'}, {field: 'industry', value: '行业领域'}, {field: 'main_business', value: '主营业务'}, {field: 'header_name', value: '单位负责人姓名'}, {field: 'header_phone', value: '单位负责人电话'}, {field: 'area', value: '场地总面积'}, {field: 'number', value: '从业人数（人）'}, {field: 'security_name', value: '安全负责人姓名'}, {field: 'sucurity_phone', value: '安全负责人电话'}, {field: 'legal_name', value: '法定代表人姓名'}, {field: 'legal_phone', value: '法定代表人电话'}, {field: 'commercial_building', value: '是否位于商务商业楼宇'}, {field: 'fuel_gas', value: '是否涉及使用燃气'}, {field: 'gauge', value: '是否为规上企业'}, {field: 'hazardous_chemicals', value: '是否涉及危险化学品'}, {field: 'enterprise_classification', value: '危化品企业分类'}, {field: 'species', value: '危化品种类'}],
         safetyOfficerData: [{id: '0047dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全总负责人'}, {id: '0057dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全第一负责人'}, {id: '0067dd5e-d3ff-4c5f-9ab4-44d75afb40a1', type: '安全第二负责人'}],
       },
@@ -157,7 +158,15 @@ export const map = {
     'craneStates.selectedArea' (value) {
       if(value) {
         const [geojson] = value.toGeoJSON()
-        this.craneStates.currentCompany = geojson.properties.names[0]
+        const names = geojson.properties.names
+        let currentCompany = ''
+        if(typeof names === 'string') {
+          currentCompany = names
+        } else {
+          currentCompany = names[0]
+        }
+        this.craneStates.currentCompany = currentCompany
+        this.craneStates.selectCompany = currentCompany
         this.resizeMap(16, geojson.properties.coordinate)
       }
     },
@@ -296,7 +305,7 @@ export const map = {
       companyData.features && companyData.features.forEach(item=> {
         let tempObj = {}
         const namesLen = item.properties.names.length
-        if(namesLen > 1) {
+        if(typeof item.properties.names !== 'string') {
           item.properties.names.forEach((el, ind)=> {
             let tempObj = {}
             tempObj.name = el
@@ -304,8 +313,8 @@ export const map = {
             resultData.push(tempObj)
           })
         } else {
-          tempObj.name = item.properties.names[0]
-          tempObj.point = this.getMidPoint(item.geometry.coordinates, namesLen, 0)
+          tempObj.name = item.properties.names
+          tempObj.point = this.getMidPoint(item.geometry.coordinates, 1, 0)
           resultData.push(tempObj)
         }
       })
